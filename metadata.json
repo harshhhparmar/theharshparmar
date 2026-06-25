@@ -1,0 +1,8 @@
+{
+  "name": "Remix: Harsh Parmar Portfolio",
+  "description": "Premium personal portfolio for Harsh Parmar, Web Developer \u0026 AI Product Builder.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
