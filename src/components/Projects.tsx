@@ -23,6 +23,18 @@ const PROJECTS = [
     badge: "Client Utility",
     featured: false,
     githubLink: "https://github.com/harshhhparmar/Jay-Computer-",
+    liveLink: "https://jaycomputer.vercel.app/",
+  },
+  {
+    title: "A2 Thai Spa",
+    subtitle: "Service Website",
+    description: "A business website built for a local spa, showcasing their services, pricing, and providing a clean online presence for customers to find them.",
+    tech: ["React", "Tailwind CSS", "Vercel", "Responsive"],
+    role: "Developer / Builder",
+    badge: "Client Business",
+    featured: false,
+    githubLink: "https://github.com/harshhhparmar/A2-Thai",
+    liveLink: "https://a2-thai.vercel.app/",
   },
 ];
 
@@ -82,6 +94,11 @@ export function Projects() {
               </div>
 
               <div className="flex gap-4">
+                {project.liveLink && (
+                  <a href={project.liveLink} target="_blank" rel="noreferrer" className="flex items-center gap-2 px-5 py-2.5 bg-brand text-white font-medium text-sm rounded-full hover:bg-brand-dark transition-colors">
+                    Live <ArrowUpRight size={16} />
+                  </a>
+                )}
                 {project.githubLink && (
                   <a href={project.githubLink} target="_blank" rel="noreferrer" className="flex items-center gap-2 px-5 py-2.5 bg-transparent border border-white/20 text-white font-medium text-sm rounded-full hover:bg-white/10 transition-colors">
                     <Github size={16} /> Code
