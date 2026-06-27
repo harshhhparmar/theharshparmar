@@ -1,6 +1,6 @@
-import { Section, SectionHeading } from "./Section";
+import { Reveal, Section } from "./Section";
 import { motion, AnimatePresence } from "motion/react";
-import { Mail, Github, Linkedin, FileText, Check } from "lucide-react";
+import { Mail, Github, Linkedin, Check } from "lucide-react";
 import { useState } from "react";
 
 export function Contact() {
@@ -36,12 +36,7 @@ export function Contact() {
       <div className="absolute inset-0 opacity-10 mix-blend-multiply bg-[url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.8%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E')]" />
       
       <div className="relative z-10 max-w-4xl mx-auto text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
+        <Reveal>
           <div className="font-mono text-black/60 font-bold mb-6 tracking-widest text-sm uppercase">
             06 • Start a conversation
           </div>
@@ -77,7 +72,7 @@ export function Contact() {
               <Github size={18} /> GitHub
             </a>
           </div>
-        </motion.div>
+        </Reveal>
       </div>
     </Section>
   );

@@ -1,4 +1,4 @@
-import { Section } from "./Section";
+import { Reveal, Section } from "./Section";
 import { motion } from "motion/react";
 
 const STEPS = [
@@ -46,10 +46,12 @@ const itemVariants = {
 export function Process() {
   return (
     <Section className="bg-[#050505]">
-      <div className="mb-10 md:mb-16 text-center">
-        <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">How I Build</h2>
-        <p className="text-gray-400 font-mono text-sm max-w-2xl mx-auto">Concept → Strategy → Execution</p>
-      </div>
+      <Reveal>
+        <div className="mb-10 md:mb-16 text-center">
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">How I Build</h2>
+          <p className="text-gray-400 font-mono text-sm max-w-2xl mx-auto">Concept → Strategy → Execution</p>
+        </div>
+      </Reveal>
       
       <motion.div 
         variants={containerVariants}

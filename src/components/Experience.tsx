@@ -1,5 +1,4 @@
-import { Section } from "./Section";
-import { motion } from "motion/react";
+import { Reveal, Section } from "./Section";
 
 const ACTIVITIES = [
   {
@@ -23,24 +22,21 @@ const ACTIVITIES = [
 export function Experience() {
   return (
     <Section className="bg-[#0a0a0a]">
-      <div className="mb-8 md:mb-12">
-        <h2 className="font-display text-3xl md:text-4xl font-semibold text-white">Beyond Coursework</h2>
-      </div>
+      <Reveal>
+        <div className="mb-8 md:mb-12">
+          <h2 className="font-display text-3xl md:text-4xl font-semibold text-white">Beyond Coursework</h2>
+        </div>
+      </Reveal>
       
       <div className="grid md:grid-cols-2 gap-4 md:gap-6">
         {ACTIVITIES.map((act, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: i * 0.1 }}
-            className="p-6 sm:p-8 rounded-2xl bg-[#111] border border-white/5 pb-8 sm:pb-12"
-          >
-            <div className="font-mono text-brand text-xs mb-3 md:mb-4">0{i + 1}</div>
-            <h3 className="text-lg sm:text-xl font-display font-medium text-white mb-2 md:mb-3">{act.title}</h3>
-            <p className="text-gray-400 text-sm leading-relaxed">{act.desc}</p>
-          </motion.div>
+          <Reveal key={i} delay={i * 0.1}>
+            <div className="p-6 sm:p-8 rounded-2xl bg-[#111] border border-white/5 pb-8 sm:pb-12 h-full">
+              <div className="font-mono text-brand text-xs mb-3 md:mb-4">0{i + 1}</div>
+              <h3 className="text-lg sm:text-xl font-display font-medium text-white mb-2 md:mb-3">{act.title}</h3>
+              <p className="text-gray-400 text-sm leading-relaxed">{act.desc}</p>
+            </div>
+          </Reveal>
         ))}
       </div>
     </Section>
