@@ -1,11 +1,55 @@
 import { motion } from "motion/react";
 import { ArrowRight, Terminal } from "lucide-react";
+import { useEffect, useState } from "react";
+
+const TYPING_TEXT = "Building useful web products with code, ";
 
 export function Hero() {
+  const [typedText, setTypedText] = useState("");
+  
+  useEffect(() => {
+    let i = 0;
+    const typingInterval = setInterval(() => {
+      if (i < TYPING_TEXT.length) {
+        setTypedText(TYPING_TEXT.substring(0, i + 1));
+        i++;
+      } else {
+        clearInterval(typingInterval);
+      }
+    }, 40);
+    return () => clearInterval(typingInterval);
+  }, []);
+
   return (
     <section id="home" className="relative min-h-[100svh] flex items-center justify-center pt-20 sm:pt-24 md:pt-32 pb-12 sm:pb-16 md:pb-20 overflow-hidden w-full">
-      <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-brand/10 via-[#050505] to-[#050505]" />
+      <motion.div 
+        animate={{ 
+          backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'],
+        }}
+        transition={{ duration: 20, ease: "linear", repeat: Infinity }}
+        className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-brand/10 via-[#050505] to-[#050505] bg-[length:200%_200%]" 
+      />
       
+      {/* Floating decorative blobs */}
+      <motion.div
+        animate={{
+          x: [0, 50, 0],
+          y: [0, 30, 0],
+          scale: [1, 1.1, 1]
+        }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand/5 rounded-full blur-[100px] pointer-events-none"
+      />
+      <motion.div
+        animate={{
+          x: [0, -40, 0],
+          y: [0, -50, 0],
+          scale: [1, 1.2, 1]
+        }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-brand/10 rounded-full blur-[120px] pointer-events-none"
+      />
+
       <div className="max-w-7xl mx-auto px-5 sm:px-8 md:px-12 xl:px-8 w-full z-10 grid lg:grid-cols-2 gap-8 md:gap-16 items-center">
         {/* Left Column - Text */}
         <div className="flex flex-col items-start text-left">
@@ -13,49 +57,76 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-brand mb-6 md:mb-8"
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-brand mb-6 md:mb-8 backdrop-blur-sm"
           >
             <span className="w-2 h-2 rounded-full bg-brand animate-pulse" />
             Available for internships & collaborations
           </motion.div>
 
-          <motion.h1
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="font-display text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight text-white mb-4 md:mb-6 leading-[1.1]"
+            className="mb-4"
           >
-            Building useful web products with code, <span className="text-brand">AI</span>, and clean design.
+            <h2 className="font-display text-[52px] sm:text-[64px] lg:text-[76px] font-extrabold tracking-tighter text-white leading-[1] mb-2">
+              HARSH
+            </h2>
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="font-display text-3xl sm:text-4xl md:text-[44px] font-bold tracking-tight text-gray-300 mb-6 md:mb-8 leading-[1.2] max-w-2xl h-[90px] sm:h-auto"
+          >
+            {typedText}
+            <motion.span
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 2, duration: 0.5 }}
+            >
+              <span className="text-brand">AI</span>, and clean design.
+            </motion.span>
+            <motion.span
+              animate={{ opacity: [1, 0, 1] }}
+              transition={{ repeat: Infinity, duration: 0.8 }}
+              className="inline-block w-3 h-8 sm:h-10 bg-brand ml-1 align-middle"
+            />
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="text-lg md:text-xl text-gray-400 mb-8 md:mb-10 max-w-2xl leading-relaxed"
+            transition={{ duration: 0.7, delay: 0.4 }}
+            className="text-[18px] text-gray-400 mb-8 md:mb-12 max-w-2xl leading-[1.7] font-light"
           >
-            I'm <span className="text-white font-medium">Harsh Parmar</span>, a Computer Engineering student focused on web development, AI-powered tools, and practical digital products. I build projects that solve real problems — from campus platforms to AI SaaS ideas.
+            I am a Computer Engineering student focused on web development, AI-powered tools, and practical digital products. I build projects that solve real problems — from campus platforms to AI SaaS ideas.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.4 }}
+            transition={{ duration: 0.7, delay: 0.5 }}
             className="flex flex-wrap items-center gap-4"
           >
-            <a
+            <motion.a
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               href="#projects"
-              className="group flex items-center gap-2 bg-brand text-black px-8 py-4 rounded-full font-medium hover:bg-brand-light transition-all duration-300 shadow-[0_0_20px_rgba(252,110,96,0.3)] hover:shadow-[0_0_30px_rgba(252,110,96,0.5)]"
+              className="group flex items-center gap-2 bg-brand text-black px-8 py-4 rounded-full font-medium transition-shadow duration-300 shadow-[0_0_20px_rgba(252,110,96,0.3)] hover:shadow-[0_0_30px_rgba(252,110,96,0.5)]"
             >
               View Projects
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-            </a>
-            <a
+            </motion.a>
+            <motion.a
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               href="#contact"
-              className="px-8 py-4 rounded-full border border-white/20 text-white font-medium hover:bg-white/5 transition-all duration-300"
+              className="px-8 py-4 rounded-full border border-white/20 text-white font-medium hover:bg-white/5 transition-colors duration-300"
             >
               Contact Me
-            </a>
+            </motion.a>
           </motion.div>
         </div>
 
@@ -69,7 +140,11 @@ export function Hero() {
           {/* Abstract Composition */}
           <div className="absolute inset-0 flex items-center justify-center">
             {/* Main Window */}
-            <div className="relative w-full max-w-md bg-[#0a0a0a] border border-white/10 rounded-xl overflow-hidden shadow-2xl z-20">
+            <motion.div 
+              animate={{ y: [-5, 5, -5] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              className="relative w-full max-w-md bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/10 rounded-xl overflow-hidden shadow-2xl z-20"
+            >
               {/* Window Header */}
               <div className="h-10 bg-white/5 flex items-center px-4 gap-2 border-b border-white/5">
                 <div className="w-3 h-3 rounded-full bg-red-500/80" />
@@ -93,29 +168,29 @@ export function Hero() {
                 <div>{`}`};</div>
                 <div className="mt-4 animate-pulse text-brand font-bold">_</div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Floating Tags & Elements */}
             <motion.div
-              animate={{ y: [-10, 10, -10] }}
-              transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-              className="absolute -top-6 -right-6 bg-white border border-white/10 text-black px-4 py-2 rounded-lg font-mono text-xs font-bold shadow-xl rotate-6 z-30"
+              animate={{ y: [-15, 15, -15], rotate: [6, 10, 6] }}
+              transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+              className="absolute -top-6 -right-6 bg-white border border-white/10 text-black px-4 py-2 rounded-lg font-mono text-xs font-bold shadow-xl z-30"
             >
               React.js
             </motion.div>
             
             <motion.div
-              animate={{ y: [10, -10, 10] }}
-              transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-              className="absolute -left-12 top-24 bg-brand text-black px-4 py-2 rounded-lg font-mono text-xs font-bold shadow-xl -rotate-6 z-10"
+              animate={{ y: [15, -15, 15], rotate: [-6, -10, -6] }}
+              transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+              className="absolute -left-12 top-24 bg-brand text-black px-4 py-2 rounded-lg font-mono text-xs font-bold shadow-xl z-10"
             >
               Next.js
             </motion.div>
 
             <motion.div
-              animate={{ y: [-15, 15, -15], rotate: [0, 5, 0] }}
-              transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-              className="absolute -bottom-8 left-10 bg-[#111] border border-white/10 px-5 py-3 rounded-lg shadow-xl z-30"
+              animate={{ y: [-10, 10, -10], rotate: [0, 5, 0] }}
+              transition={{ repeat: Infinity, duration: 7, ease: "easeInOut" }}
+              className="absolute -bottom-8 left-10 bg-[#111]/80 backdrop-blur-md border border-white/10 px-5 py-3 rounded-lg shadow-xl z-30"
             >
               <div className="text-xs text-gray-400 font-mono mb-1">AI Prompt</div>
               <div className="text-sm text-white">Generate premium SaaS UI...</div>
