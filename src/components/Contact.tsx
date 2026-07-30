@@ -1,7 +1,7 @@
 import { Reveal, Section } from "./Section";
 import { motion, AnimatePresence } from "motion/react";
 import { Mail, Github, Linkedin, Check, MapPin, Clock, Loader2, Send } from "lucide-react";
-import { useState } from "react";
+import React, { useState } from "react";
 
 export function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -79,7 +79,7 @@ export function Contact() {
           <div className="lg:col-span-5 relative">
             <Reveal delay={0.1}>
               <div className="relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-[24px] p-6 sm:p-8 md:p-10 overflow-hidden group">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-brand/10 blur-[80px] rounded-full pointer-events-none transition-opacity duration-700 opacity-50 group-hover:opacity-100" />
+                <div className="absolute top-0 right-0 w-96 h-96 -mr-20 -mt-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand/10 to-transparent rounded-full pointer-events-none transition-opacity duration-700 opacity-50 group-hover:opacity-100" />
                 
                 <h3 className="font-display text-2xl font-bold text-white mb-8 relative z-10">Contact Information</h3>
                 

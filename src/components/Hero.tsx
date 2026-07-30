@@ -22,13 +22,7 @@ export function Hero() {
 
   return (
     <section id="home" className="relative min-h-[100svh] flex items-center justify-center pt-20 sm:pt-24 md:pt-32 pb-12 sm:pb-16 md:pb-20 overflow-hidden w-full">
-      <motion.div 
-        animate={{ 
-          backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'],
-        }}
-        transition={{ duration: 20, ease: "linear", repeat: Infinity }}
-        className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-brand/10 via-[#050505] to-[#050505] bg-[length:200%_200%]" 
-      />
+      <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-brand/10 via-[#050505] to-[#050505]" />
       
       {/* Floating decorative blobs */}
       <motion.div
@@ -38,7 +32,7 @@ export function Hero() {
           scale: [1, 1.1, 1]
         }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand/5 rounded-full blur-[100px] pointer-events-none"
+        className="absolute top-1/4 left-1/4 w-[600px] h-[600px] -ml-[300px] -mt-[300px] bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand/10 to-transparent rounded-full pointer-events-none"
       />
       <motion.div
         animate={{
@@ -47,7 +41,7 @@ export function Hero() {
           scale: [1, 1.2, 1]
         }}
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-        className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-brand/10 rounded-full blur-[120px] pointer-events-none"
+        className="absolute bottom-1/4 right-1/4 w-[800px] h-[800px] -mr-[400px] -mb-[400px] bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand/10 to-transparent rounded-full pointer-events-none"
       />
 
       <div className="max-w-7xl mx-auto px-5 sm:px-8 md:px-12 xl:px-8 w-full z-10 grid lg:grid-cols-2 gap-8 md:gap-16 items-center">

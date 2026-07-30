@@ -17,24 +17,43 @@ export function Navbar() {
   const [activeSection, setActiveSection] = useState("#home");
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+    let ticking = false;
+    let sectionsCache: { id: string; top: number }[] = [];
 
-      // Determine active section
-      const sections = NAV_LINKS.map(link => document.querySelector(link.href));
-      let currentSection = "#home";
-      sections.forEach(section => {
-        if (section) {
-          const sectionTop = (section as HTMLElement).offsetTop;
-          if (window.scrollY >= sectionTop - 200) {
-            currentSection = `#${section.id}`;
-          }
-        }
+    const updateCache = () => {
+      sectionsCache = NAV_LINKS.map(link => {
+        const el = document.querySelector(link.href) as HTMLElement;
+        return { id: link.href, top: el ? el.offsetTop : 0 };
       });
-      setActiveSection(currentSection);
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    updateCache();
+    window.addEventListener('resize', updateCache);
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 50);
+
+          let currentSection = "#home";
+          sectionsCache.forEach(section => {
+            if (window.scrollY >= section.top - 200) {
+              currentSection = section.id;
+            }
+          });
+          
+          setActiveSection(currentSection);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", updateCache);
+    };
   }, []);
 
   return (

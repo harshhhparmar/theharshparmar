@@ -61,7 +61,7 @@ export function Projects() {
               className={`interactive-hover group relative bg-[#111] border border-white/5 rounded-[32px] overflow-hidden flex flex-col ${project.featured ? 'lg:flex-row' : ''} transition-colors duration-500 hover:border-white/10`}
             >
               {/* Image Section (for featured projects) */}
-              {project.featured && project.image && (
+              {project.featured && 'image' in project && project.image && (
                 <div className="lg:w-5/12 relative overflow-hidden bg-[#0a0a0a]">
                   <motion.div
                     variants={{
@@ -72,7 +72,7 @@ export function Projects() {
                     className="absolute inset-0"
                   >
                     <img 
-                      src={project.image} 
+                      src={project.image as string} 
                       alt={project.title} 
                       className="w-full h-full object-cover opacity-60 grayscale group-hover:grayscale-0 transition-all duration-700" 
                     />

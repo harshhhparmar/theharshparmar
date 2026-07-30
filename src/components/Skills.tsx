@@ -60,7 +60,7 @@ export function Skills() {
               <motion.div
                 whileHover="hover"
                 initial="initial"
-                className="group relative bg-[#111] border border-white/5 rounded-[20px] p-8 h-full flex flex-col transition-all duration-500 hover:border-brand/30 hover:shadow-[0_0_30px_rgba(252,110,96,0.1)] overflow-hidden"
+                className="group relative bg-[#111] border border-white/5 rounded-[20px] p-8 h-full flex flex-col transition-colors duration-300 hover:border-brand/30 overflow-hidden"
               >
                 {/* Glow Effect */}
                 <div className="absolute inset-0 bg-gradient-to-br from-brand/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
