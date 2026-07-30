@@ -64,7 +64,7 @@ export function Experience() {
                 <div className={`relative flex flex-col md:flex-row items-start ${isEven ? 'md:flex-row-reverse' : ''}`}>
                   
                   {/* Timeline Node */}
-                  <div className="absolute left-0 md:left-1/2 w-14 h-14 bg-[#111] border-4 border-[#0a0a0a] rounded-full flex items-center justify-center text-brand z-10 md:-translate-x-1/2 group-hover:scale-110 transition-transform duration-300">
+                  <div className="absolute left-0 md:left-1/2 w-14 h-14 bg-white/[0.02] backdrop-blur-xl border border-white/10 rounded-full flex items-center justify-center text-brand z-10 md:-translate-x-1/2 group-hover:scale-110 transition-transform duration-300 shadow-xl">
                     <Icon size={20} />
                   </div>
 

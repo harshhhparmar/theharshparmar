@@ -5,6 +5,18 @@ import { ArrowUpRight, Github } from "lucide-react";
 
 const PROJECTS = [
   {
+    title: "Solenta Tiles",
+    subtitle: "Premium Tile Showcase Platform",
+    description: "A modern web application showcasing premium tile collections with an elegant user interface, responsive design, and smooth visual experience.",
+    tech: ["React", "Next.js", "Tailwind CSS", "Vercel"],
+    role: "Frontend Developer",
+    badge: "Client Business",
+    category: "Frontend",
+    featured: true,
+    githubLink: "https://github.com/harshhhparmar/solenta.tiles",
+    liveLink: "https://solentatiles.vercel.app/"
+  },
+  {
     title: "NorthPeak",
     subtitle: "AI SaaS & Productivity Tool",
     description: "An AI-powered platform for streamlining workflows, boosting productivity, and automating tasks. Features advanced insights, file management, and smart dashboards.",

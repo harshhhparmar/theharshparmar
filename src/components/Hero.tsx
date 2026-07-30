@@ -143,7 +143,7 @@ export function Hero() {
             <motion.div 
               animate={{ y: [-5, 5, -5] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="relative w-full max-w-md bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/10 rounded-xl overflow-hidden shadow-2xl z-20"
+              className="relative w-full max-w-md bg-white/[0.02] backdrop-blur-xl border border-white/10 rounded-xl overflow-hidden shadow-2xl z-20"
             >
               {/* Window Header */}
               <div className="h-10 bg-white/5 flex items-center px-4 gap-2 border-b border-white/5">
@@ -190,7 +190,7 @@ export function Hero() {
             <motion.div
               animate={{ y: [-10, 10, -10], rotate: [0, 5, 0] }}
               transition={{ repeat: Infinity, duration: 7, ease: "easeInOut" }}
-              className="absolute -bottom-8 left-10 bg-[#111]/80 backdrop-blur-md border border-white/10 px-5 py-3 rounded-lg shadow-xl z-30"
+              className="absolute -bottom-8 left-10 bg-white/[0.02] backdrop-blur-xl border border-white/10 px-5 py-3 rounded-lg shadow-xl z-30"
             >
               <div className="text-xs text-gray-400 font-mono mb-1">AI Prompt</div>
               <div className="text-sm text-white">Generate premium SaaS UI...</div>

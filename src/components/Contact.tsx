@@ -152,7 +152,7 @@ export function Contact() {
                       id="name" 
                       name="user_name"
                       required
-                      className="bg-[#050505] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand/50 focus:ring-1 focus:ring-brand/50 transition-all placeholder:text-gray-600"
+                      className="bg-white/[0.02] backdrop-blur-sm border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand/50 focus:ring-1 focus:ring-brand/50 transition-all placeholder:text-gray-600"
                       placeholder="John Doe"
                     />
                   </div>
@@ -163,7 +163,7 @@ export function Contact() {
                       id="email" 
                       name="user_email"
                       required
-                      className="bg-[#050505] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand/50 focus:ring-1 focus:ring-brand/50 transition-all placeholder:text-gray-600"
+                      className="bg-white/[0.02] backdrop-blur-sm border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand/50 focus:ring-1 focus:ring-brand/50 transition-all placeholder:text-gray-600"
                       placeholder="john@example.com"
                     />
                   </div>
@@ -176,7 +176,7 @@ export function Contact() {
                     id="subject" 
                     name="subject"
                     required
-                    className="bg-[#050505] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand/50 focus:ring-1 focus:ring-brand/50 transition-all placeholder:text-gray-600"
+                    className="bg-white/[0.02] backdrop-blur-sm border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand/50 focus:ring-1 focus:ring-brand/50 transition-all placeholder:text-gray-600"
                     placeholder="Project Inquiry"
                   />
                 </div>
@@ -188,7 +188,7 @@ export function Contact() {
                     name="message"
                     required
                     rows={5}
-                    className="bg-[#050505] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand/50 focus:ring-1 focus:ring-brand/50 transition-all placeholder:text-gray-600 resize-none"
+                    className="bg-white/[0.02] backdrop-blur-sm border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand/50 focus:ring-1 focus:ring-brand/50 transition-all placeholder:text-gray-600 resize-none"
                     placeholder="Tell me about your project..."
                   />
                 </div>
