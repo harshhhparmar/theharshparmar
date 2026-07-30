@@ -6,9 +6,10 @@ import { cn } from "../lib/utils";
 const NAV_LINKS = [
   { num: "01", name: "Home", href: "#home" },
   { num: "02", name: "About", href: "#about" },
-  { num: "03", name: "Projects", href: "#projects" },
-  { num: "04", name: "Skills", href: "#skills" },
-  { num: "05", name: "Contact", href: "#contact" },
+  { num: "03", name: "Experience", href: "#experience" },
+  { num: "04", name: "Projects", href: "#projects" },
+  { num: "05", name: "Skills", href: "#skills" },
+  { num: "06", name: "Contact", href: "#contact" },
 ];
 
 export function Navbar() {

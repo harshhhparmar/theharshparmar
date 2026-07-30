@@ -1,39 +1,91 @@
 import { Reveal, Section } from "./Section";
 import { Monitor, Server, Terminal, Database, Sparkles, Wrench } from "lucide-react";
-import { motion } from "motion/react";
+import { motion, useInView } from "motion/react";
+import React, { useRef } from "react";
 
 const SKILL_CATEGORIES = [
   {
     title: "Frontend",
     icon: Monitor,
-    skills: ["React", "Next.js", "HTML", "CSS", "JavaScript", "Tailwind"],
+    skills: [
+      { name: "React", level: 90 },
+      { name: "Next.js", level: 80 },
+      { name: "HTML/CSS", level: 95 },
+      { name: "JavaScript", level: 85 },
+      { name: "Tailwind", level: 90 }
+    ],
   },
   {
     title: "Backend",
     icon: Server,
-    skills: ["Node.js", "Express", "Firebase", "MongoDB", "REST APIs"],
+    skills: [
+      { name: "Node.js", level: 80 },
+      { name: "Express", level: 75 },
+      { name: "Firebase", level: 85 },
+      { name: "REST APIs", level: 85 },
+    ],
   },
   {
     title: "Programming",
     icon: Terminal,
-    skills: ["Java", "Python", "C", "JavaScript"],
+    skills: [
+      { name: "Java", level: 70 },
+      { name: "Python", level: 65 },
+      { name: "C", level: 80 },
+    ],
   },
   {
     title: "Databases",
     icon: Database,
-    skills: ["MongoDB", "Firebase", "MySQL"],
+    skills: [
+      { name: "MongoDB", level: 75 },
+      { name: "MySQL", level: 70 },
+    ],
   },
   {
     title: "AI & Data",
     icon: Sparkles,
-    skills: ["Generative AI", "Prompt Engineering", "Google AI Studio", "Data Analytics"],
+    skills: [
+      { name: "Generative AI", level: 80 },
+      { name: "Prompt Engineering", level: 85 },
+      { name: "Data Analytics", level: 70 },
+    ],
   },
   {
     title: "Tools",
     icon: Wrench,
-    skills: ["Git", "GitHub", "VS Code", "Vercel", "Figma"],
+    skills: [
+      { name: "Git/GitHub", level: 85 },
+      { name: "VS Code", level: 95 },
+      { name: "Vercel", level: 90 },
+      { name: "Figma", level: 75 },
+    ],
   },
 ];
+
+const SkillBar: React.FC<{ skill: { name: string; level: number } }> = ({ skill }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
+  return (
+    <div ref={ref} className="mb-4 last:mb-0">
+      <div className="flex justify-between items-center mb-2">
+        <span className="text-sm text-gray-300 font-medium">{skill.name}</span>
+        <span className="text-xs text-brand font-mono">{skill.level}%</span>
+      </div>
+      <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden border border-white/5">
+        <motion.div
+          initial={{ width: 0 }}
+          animate={isInView ? { width: `${skill.level}%` } : { width: 0 }}
+          transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+          className="h-full bg-gradient-to-r from-brand-dark to-brand rounded-full relative"
+        >
+          <div className="absolute top-0 right-0 bottom-0 w-10 bg-gradient-to-l from-white/20 to-transparent" />
+        </motion.div>
+      </div>
+    </div>
+  );
+}
 
 export function Skills() {
   return (
@@ -83,19 +135,9 @@ export function Skills() {
                   
                   <div className="h-px w-full bg-white/10 mb-6 group-hover:bg-brand/20 transition-colors duration-500" />
                   
-                  <div className="flex flex-wrap gap-2 mt-auto">
-                    {category.skills.map((skill, skillIdx) => (
-                      <motion.span
-                        key={skill}
-                        variants={{
-                          initial: { y: 0, opacity: 1 },
-                          hover: { y: -2, opacity: 1 }
-                        }}
-                        transition={{ duration: 0.2, delay: skillIdx * 0.05 }}
-                        className="px-3 py-1.5 bg-[#050505] border border-white/5 rounded-md text-sm text-gray-400 group-hover:border-white/20 group-hover:text-gray-200 transition-colors pointer-events-none"
-                      >
-                        {skill}
-                      </motion.span>
+                  <div className="flex flex-col gap-1 w-full">
+                    {category.skills.map((skill) => (
+                      <SkillBar key={skill.name} skill={skill} />
                     ))}
                   </div>
                 </div>

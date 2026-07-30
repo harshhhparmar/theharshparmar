@@ -15,7 +15,9 @@ import { Process } from './components/Process';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { CustomCursor } from './components/CustomCursor';
+import { GitHubStats } from './components/GitHubStats';
 import { Analytics } from '@vercel/analytics/react';
+import { Toaster } from 'sonner';
 
 export default function App() {
   return (
@@ -27,12 +29,14 @@ export default function App() {
       <Stats />
       <Skills />
       <Projects />
+      <GitHubStats />
       <Achievements />
       <Experience />
       <Process />
       <Contact />
       <Footer />
       <Analytics />
+      <Toaster theme="dark" position="bottom-right" />
     </main>
   );
 }

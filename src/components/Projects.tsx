@@ -1,5 +1,6 @@
+import { useState, useMemo } from "react";
 import { Reveal, Section } from "./Section";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import { ArrowUpRight, Github } from "lucide-react";
 
 const PROJECTS = [
@@ -11,6 +12,7 @@ const PROJECTS = [
     tech: ["MERN", "React", "Firebase Auth", "Responsive UI"],
     role: "Project Team Lead / Developer",
     badge: "Academic + Real-world",
+    category: "Full Stack",
     featured: true,
     githubLink: "https://github.com/harshhhparmar/Back2U"
   },
@@ -21,6 +23,7 @@ const PROJECTS = [
     tech: ["Web Dev", "Vercel", "Responsive"],
     role: "Developer / Builder",
     badge: "Client Utility",
+    category: "Frontend",
     featured: false,
     githubLink: "https://github.com/harshhhparmar/Jay-Computer-",
     liveLink: "https://jaycomputer.vercel.app/",
@@ -32,32 +35,62 @@ const PROJECTS = [
     tech: ["React", "Tailwind CSS", "Vercel", "Responsive"],
     role: "Developer / Builder",
     badge: "Client Business",
+    category: "Frontend",
     featured: false,
     githubLink: "https://github.com/harshhhparmar/A2-Thai",
     liveLink: "https://a2-thai.vercel.app/",
   },
 ];
 
+const CATEGORIES = ["All", "Full Stack", "Frontend"];
+
 export function Projects() {
+  const [activeCategory, setActiveCategory] = useState("All");
+
+  const filteredProjects = useMemo(() => {
+    if (activeCategory === "All") return PROJECTS;
+    return PROJECTS.filter(p => p.category === activeCategory);
+  }, [activeCategory]);
+
   return (
     <Section id="projects" className="bg-[#050505]">
-      <div className="text-center mb-16 md:mb-24">
+      <div className="text-center mb-12 md:mb-20">
         <Reveal>
           <div className="inline-block font-mono text-brand text-sm tracking-[0.2em] uppercase mb-4">
             Selected Work
           </div>
-          <h2 className="font-display text-4xl md:text-[48px] leading-[1.1] font-bold text-white">
+          <h2 className="font-display text-4xl md:text-[48px] leading-[1.1] font-bold text-white mb-10">
             Projects I've Built.
           </h2>
+          
+          <div className="flex flex-wrap justify-center gap-3">
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                  activeCategory === cat 
+                    ? "bg-brand text-black shadow-[0_0_15px_rgba(252,110,96,0.3)]" 
+                    : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-gray-200 border border-white/5"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
         </Reveal>
       </div>
       
-      <div className="grid gap-8 md:gap-12">
-        {PROJECTS.map((project, idx) => (
-          <Reveal key={project.title} delay={idx * 0.15}>
+      <motion.div layout className="grid gap-8 md:gap-12">
+        <AnimatePresence mode="popLayout">
+          {filteredProjects.map((project, idx) => (
             <motion.div
-              whileHover="hover"
-              initial="initial"
+              layout
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              key={project.title}
               className={`interactive-hover group relative bg-[#111] border border-white/5 rounded-[32px] overflow-hidden flex flex-col ${project.featured ? 'lg:flex-row' : ''} transition-colors duration-500 hover:border-white/10`}
             >
               {/* Image Section (for featured projects) */}
@@ -114,14 +147,7 @@ export function Projects() {
                   ))}
                 </div>
 
-                <motion.div 
-                  variants={{
-                    initial: { y: 0 },
-                    hover: { y: -5 }
-                  }}
-                  transition={{ duration: 0.3 }}
-                  className="flex gap-4 mt-auto"
-                >
+                <div className="flex gap-4 mt-auto">
                   {project.liveLink && (
                     <a href={project.liveLink} target="_blank" rel="noreferrer" className="flex items-center gap-2 px-6 py-3 bg-brand text-black font-semibold text-sm rounded-full hover:bg-brand-light transition-colors shadow-lg hover:shadow-brand/25">
                       Live Project <ArrowUpRight size={16} />
@@ -132,12 +158,12 @@ export function Projects() {
                       <Github size={16} /> View Code
                     </a>
                   )}
-                </motion.div>
+                </div>
               </div>
             </motion.div>
-          </Reveal>
-        ))}
-      </div>
+          ))}
+        </AnimatePresence>
+      </motion.div>
     </Section>
   );
 }

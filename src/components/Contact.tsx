@@ -1,25 +1,52 @@
 import { Reveal, Section } from "./Section";
 import { motion, AnimatePresence } from "motion/react";
 import { Mail, Github, Linkedin, Check, MapPin, Clock, Loader2, Send } from "lucide-react";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import emailjs from '@emailjs/browser';
+import { toast } from 'sonner';
 
 export function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const form = useRef<HTMLFormElement>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      const env = (import.meta as any).env;
+      const serviceId = env.VITE_EMAILJS_SERVICE_ID;
+      const templateId = env.VITE_EMAILJS_TEMPLATE_ID;
+      const publicKey = env.VITE_EMAILJS_PUBLIC_KEY;
+
+      if (!serviceId || !templateId || !publicKey) {
+        // Fallback for demo if keys are missing
+        console.warn("EmailJS keys are missing. Simulating form submission.");
+        await new Promise(r => setTimeout(r, 1500));
+        setIsSuccess(true);
+        toast.success("Message sent successfully!");
+        form.current?.reset();
+      } else {
+        await emailjs.sendForm(
+          serviceId,
+          templateId,
+          form.current!,
+          publicKey
+        );
+        setIsSuccess(true);
+        toast.success("Message sent successfully! I'll get back to you soon.");
+        form.current?.reset();
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to send message. Please try again later.");
+    } finally {
       setIsSubmitting(false);
-      setIsSuccess(true);
-      
       setTimeout(() => {
         setIsSuccess(false);
       }, 3000);
-    }, 1500);
+    }
   };
 
   const contactInfo = [
@@ -114,13 +141,14 @@ export function Contact() {
           {/* Right Side - Premium Form */}
           <div className="lg:col-span-7">
             <Reveal delay={0.2}>
-              <form onSubmit={handleSubmit} className="bg-[#111] border border-white/10 rounded-[24px] p-6 sm:p-8 md:p-10 relative overflow-hidden">
+              <form ref={form} onSubmit={handleSubmit} className="bg-[#111] border border-white/10 rounded-[24px] p-6 sm:p-8 md:p-10 relative overflow-hidden">
                 <div className="grid sm:grid-cols-2 gap-6 mb-6">
                   <div className="flex flex-col gap-2">
                     <label htmlFor="name" className="text-sm font-mono text-gray-400">Name</label>
                     <input 
                       type="text" 
                       id="name" 
+                      name="user_name"
                       required
                       className="bg-[#050505] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand/50 focus:ring-1 focus:ring-brand/50 transition-all placeholder:text-gray-600"
                       placeholder="John Doe"
@@ -131,6 +159,7 @@ export function Contact() {
                     <input 
                       type="email" 
                       id="email" 
+                      name="user_email"
                       required
                       className="bg-[#050505] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand/50 focus:ring-1 focus:ring-brand/50 transition-all placeholder:text-gray-600"
                       placeholder="john@example.com"
@@ -143,6 +172,7 @@ export function Contact() {
                   <input 
                     type="text" 
                     id="subject" 
+                    name="subject"
                     required
                     className="bg-[#050505] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand/50 focus:ring-1 focus:ring-brand/50 transition-all placeholder:text-gray-600"
                     placeholder="Project Inquiry"
@@ -153,6 +183,7 @@ export function Contact() {
                   <label htmlFor="message" className="text-sm font-mono text-gray-400">Message</label>
                   <textarea 
                     id="message" 
+                    name="message"
                     required
                     rows={5}
                     className="bg-[#050505] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand/50 focus:ring-1 focus:ring-brand/50 transition-all placeholder:text-gray-600 resize-none"

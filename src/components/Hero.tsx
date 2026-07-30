@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { ArrowRight, Terminal } from "lucide-react";
+import { ArrowRight, Terminal, Download, Github, Linkedin } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const TYPING_TEXT = "Building useful web products with code, ";
@@ -102,7 +102,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.5 }}
-            className="flex flex-wrap items-center gap-4"
+            className="flex flex-wrap items-center gap-4 mb-8"
           >
             <motion.a
               whileHover={{ scale: 1.05 }}
@@ -116,11 +116,27 @@ export function Hero() {
             <motion.a
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              href="#contact"
-              className="px-8 py-4 rounded-full border border-white/20 text-white font-medium hover:bg-white/5 transition-colors duration-300"
+              href="/resume.pdf"
+              download="Harsh_Parmar_Resume.pdf"
+              className="group flex items-center gap-2 px-8 py-4 rounded-full border border-white/20 text-white font-medium hover:bg-white/5 transition-colors duration-300"
             >
-              Contact Me
+              <Download size={18} className="group-hover:translate-y-1 transition-transform" />
+              Resume
             </motion.a>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.6 }}
+            className="flex gap-4"
+          >
+            <a href="https://github.com/harshhhparmar" target="_blank" rel="noreferrer" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:border-white/30 hover:bg-white/5 transition-all">
+              <Github size={20} />
+            </a>
+            <a href="https://linkedin.com/in/harshparmar007" target="_blank" rel="noreferrer" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:border-white/30 hover:bg-white/5 transition-all">
+              <Linkedin size={20} />
+            </a>
           </motion.div>
         </div>
 
