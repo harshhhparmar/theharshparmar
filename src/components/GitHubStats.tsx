@@ -14,23 +14,32 @@ export function GitHubStats() {
   });
 
   useEffect(() => {
-    fetch(`https://api.github.com/users/${USERNAME}`)
-      .then(res => res.json())
-      .then(data => {
-        setStats(prev => ({ ...prev, repos: data.public_repos, followers: data.followers }));
-      })
-      .catch(console.error);
-      
-    // Quick estimation for stars
-    fetch(`https://api.github.com/users/${USERNAME}/repos?per_page=100`)
-      .then(res => res.json())
-      .then(data => {
-        if (Array.isArray(data)) {
-          const stars = data.reduce((acc, repo) => acc + repo.stargazers_count, 0);
-          setStats(prev => ({ ...prev, stars }));
+    const fetchStats = async () => {
+      try {
+        const userRes = await fetch(`https://api.github.com/users/${USERNAME}`);
+        if (!userRes.ok) return;
+        const userData = await userRes.json();
+        
+        const reposRes = await fetch(`https://api.github.com/users/${USERNAME}/repos?per_page=100`);
+        if (!reposRes.ok) return;
+        const reposData = await reposRes.json();
+        
+        let stars = 0;
+        if (Array.isArray(reposData)) {
+          stars = reposData.reduce((acc, repo) => acc + repo.stargazers_count, 0);
         }
-      })
-      .catch(console.error);
+
+        setStats({
+          repos: userData.public_repos || 0,
+          followers: userData.followers || 0,
+          stars
+        });
+      } catch (err) {
+        console.warn('Could not fetch GitHub stats:', err);
+      }
+    };
+
+    fetchStats();
   }, []);
 
   return (
@@ -85,6 +94,8 @@ export function GitHubStats() {
               blockSize={14}
               blockMargin={4}
               fontSize={14}
+              throwOnError={false}
+              errorMessage="GitHub contributions could not be loaded."
             />
           </div>
         </div>
