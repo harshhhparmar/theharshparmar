@@ -44,7 +44,7 @@ export function Achievements() {
           <motion.div
             key={i}
             variants={itemVariants}
-            className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] transition-colors"
+            className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl bg-white/[0.02] backdrop-blur-sm border border-white/5 hover:bg-white/[0.04] transition-colors"
           >
             <CheckCircle2 className="text-brand shrink-0 mt-0.5" size={18} />
             <span className="text-gray-300 text-sm md:text-base leading-relaxed">{item}</span>

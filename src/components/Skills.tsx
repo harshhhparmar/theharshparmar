@@ -89,8 +89,11 @@ const SkillBar: React.FC<{ skill: { name: string; level: number } }> = ({ skill 
 
 export function Skills() {
   return (
-    <Section id="skills" className="bg-[#0a0a0a]">
-      <div className="text-center mb-16 md:mb-24">
+    <Section id="skills" className="bg-[#0a0a0a] relative overflow-hidden">
+      {/* Ambient background glow for glassmorphism */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40rem] h-[40rem] bg-brand/5 rounded-full blur-[150px] pointer-events-none" />
+
+      <div className="text-center mb-16 md:mb-24 relative z-10">
         <Reveal>
           <div className="inline-block font-mono text-brand text-sm tracking-[0.2em] uppercase mb-4">
             My Skills
@@ -112,7 +115,7 @@ export function Skills() {
               <motion.div
                 whileHover="hover"
                 initial="initial"
-                className="group relative bg-[#111] border border-white/5 rounded-[20px] p-8 h-full flex flex-col transition-colors duration-300 hover:border-brand/30 overflow-hidden"
+                className="group relative bg-white/[0.02] backdrop-blur-xl border border-white/10 rounded-[20px] p-8 h-full flex flex-col transition-all duration-300 hover:bg-white/[0.04] hover:border-brand/30 overflow-hidden"
               >
                 {/* Glow Effect */}
                 <div className="absolute inset-0 bg-gradient-to-br from-brand/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />

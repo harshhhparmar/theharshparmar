@@ -65,8 +65,12 @@ export function Projects() {
   }, [activeCategory]);
 
   return (
-    <Section id="projects" className="bg-[#050505]">
-      <div className="text-center mb-12 md:mb-20">
+    <Section id="projects" className="bg-[#050505] relative overflow-hidden">
+      {/* Ambient background glows for glassmorphism */}
+      <div className="absolute top-1/4 left-0 w-96 h-96 bg-brand/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-0 w-[30rem] h-[30rem] bg-brand/5 rounded-full blur-[150px] pointer-events-none" />
+      
+      <div className="text-center mb-12 md:mb-20 relative z-10">
         <Reveal>
           <div className="inline-block font-mono text-brand text-sm tracking-[0.2em] uppercase mb-4">
             Selected Work
@@ -103,7 +107,7 @@ export function Projects() {
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
               key={project.title}
-              className={`interactive-hover group relative bg-[#111] border border-white/5 rounded-[32px] overflow-hidden flex flex-col ${project.featured ? 'lg:flex-row' : ''} transition-colors duration-500 hover:border-white/10`}
+              className={`interactive-hover group relative bg-white/[0.02] backdrop-blur-xl border border-white/10 rounded-[32px] overflow-hidden flex flex-col ${project.featured ? 'lg:flex-row' : ''} transition-all duration-500 hover:bg-white/[0.04] hover:border-white/20`}
             >
               {/* Image Section (for featured projects) */}
               {project.featured && 'image' in project && project.image && (
@@ -145,7 +149,7 @@ export function Projects() {
                 </p>
 
                 {project.problemSolved && (
-                  <div className="mb-8 p-5 bg-white/5 rounded-2xl border border-white/5 max-w-2xl backdrop-blur-sm">
+                  <div className="mb-8 p-5 bg-black/40 rounded-2xl border border-white/5 max-w-2xl backdrop-blur-md">
                     <span className="block text-brand text-xs font-mono uppercase tracking-wider mb-2">Problem Solved</span>
                     <span className="text-sm text-gray-300 leading-relaxed font-light">{project.problemSolved}</span>
                   </div>

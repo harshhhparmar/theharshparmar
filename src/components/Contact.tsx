@@ -84,8 +84,10 @@ export function Contact() {
 
   return (
     <Section id="contact" className="bg-[#050505] relative overflow-hidden">
+      {/* Ambient background glow for glassmorphism */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50rem] h-[50rem] bg-brand/5 rounded-full blur-[150px] pointer-events-none" />
       
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-16 md:mb-24">
           <Reveal>
             <div className="inline-block font-mono text-brand text-sm tracking-[0.2em] uppercase mb-4">
@@ -105,8 +107,8 @@ export function Contact() {
           {/* Left Side - Glassmorphism Card */}
           <div className="lg:col-span-5 relative">
             <Reveal delay={0.1}>
-              <div className="relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-[24px] p-6 sm:p-8 md:p-10 overflow-hidden group">
-                <div className="absolute top-0 right-0 w-96 h-96 -mr-20 -mt-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand/10 to-transparent rounded-full pointer-events-none transition-opacity duration-700 opacity-50 group-hover:opacity-100" />
+              <div className="bg-white/[0.02] backdrop-blur-xl border border-white/10 rounded-[24px] p-8 md:p-12 h-full relative overflow-hidden group">
+                <div className="absolute inset-0 bg-gradient-to-br from-brand/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 
                 <h3 className="font-display text-2xl font-bold text-white mb-8 relative z-10">Contact Information</h3>
                 
@@ -141,7 +143,7 @@ export function Contact() {
           {/* Right Side - Premium Form */}
           <div className="lg:col-span-7">
             <Reveal delay={0.2}>
-              <form ref={form} onSubmit={handleSubmit} className="bg-[#111] border border-white/10 rounded-[24px] p-6 sm:p-8 md:p-10 relative overflow-hidden">
+              <form ref={form} onSubmit={handleSubmit} className="bg-white/[0.02] backdrop-blur-xl border border-white/10 rounded-[24px] p-6 sm:p-8 md:p-10 relative overflow-hidden">
                 <div className="grid sm:grid-cols-2 gap-6 mb-6">
                   <div className="flex flex-col gap-2">
                     <label htmlFor="name" className="text-sm font-mono text-gray-400">Name</label>

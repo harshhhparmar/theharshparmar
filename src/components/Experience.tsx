@@ -35,8 +35,11 @@ const EXPERIENCES = [
 
 export function Experience() {
   return (
-    <Section id="experience" className="bg-[#0a0a0a]">
-      <div className="text-center mb-16 md:mb-24">
+    <Section id="experience" className="bg-[#0a0a0a] relative overflow-hidden">
+      {/* Ambient background glow for glassmorphism */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[30rem] h-[30rem] bg-brand/5 rounded-full blur-[150px] pointer-events-none" />
+
+      <div className="text-center mb-16 md:mb-24 relative z-10">
         <Reveal>
           <div className="inline-block font-mono text-brand text-sm tracking-[0.2em] uppercase mb-4">
             Journey
@@ -69,7 +72,7 @@ export function Experience() {
                   <div className={`ml-20 md:ml-0 md:w-1/2 ${isEven ? 'md:pr-16 md:text-right' : 'md:pl-16 text-left'}`}>
                     <motion.div 
                       whileHover={{ y: -5 }}
-                      className="bg-[#111] border border-white/5 rounded-[24px] p-6 sm:p-8 hover:border-brand/30 transition-colors duration-300 group"
+                      className="bg-white/[0.02] backdrop-blur-xl border border-white/10 rounded-[24px] p-6 sm:p-8 hover:bg-white/[0.04] hover:border-brand/30 transition-all duration-300 group"
                     >
                       <span className="inline-block text-xs font-mono text-brand mb-2 px-3 py-1 bg-brand/10 rounded-full">
                         {exp.date}

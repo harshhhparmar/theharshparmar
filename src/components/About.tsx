@@ -12,12 +12,15 @@ export function About() {
   ];
 
   return (
-    <Section id="about" className="bg-[#050505]">
-      <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+    <Section id="about" className="bg-[#050505] relative overflow-hidden">
+      {/* Ambient background glow for glassmorphism */}
+      <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-brand/5 rounded-full blur-[150px] pointer-events-none" />
+
+      <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
         {/* Left Column - Visual */}
         <div className="lg:col-span-5 relative">
           <Reveal>
-            <div className="relative aspect-[4/5] rounded-3xl overflow-hidden border border-white/10 bg-[#111] group">
+            <div className="relative aspect-[4/5] rounded-3xl overflow-hidden border border-white/10 bg-white/[0.02] backdrop-blur-xl group">
               {/* Decorative Gradient Background */}
               <div className="absolute inset-0 bg-gradient-to-br from-brand/20 via-transparent to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
               
@@ -84,12 +87,6 @@ export function About() {
                 className="flex items-center gap-2 px-8 py-4 bg-brand text-black font-medium rounded-full hover:bg-brand-light transition-colors shadow-lg hover:shadow-brand/25"
               >
                 Let's Connect
-              </a>
-              <a 
-                href="#"
-                className="flex items-center gap-2 px-8 py-4 bg-[#111] border border-white/20 text-white font-medium rounded-full hover:bg-white/5 transition-colors"
-              >
-                <Download size={18} /> Download Resume
               </a>
             </div>
           </Reveal>
