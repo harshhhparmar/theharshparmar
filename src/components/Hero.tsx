@@ -113,16 +113,6 @@ export function Hero() {
               View Projects
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </motion.a>
-            <motion.a
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              href="/resume.pdf"
-              download="Harsh_Parmar_Resume.pdf"
-              className="group flex items-center gap-2 px-8 py-4 rounded-full border border-white/20 text-white font-medium hover:bg-white/5 transition-colors duration-300"
-            >
-              <Download size={18} className="group-hover:translate-y-1 transition-transform" />
-              Resume
-            </motion.a>
           </motion.div>
 
           <motion.div

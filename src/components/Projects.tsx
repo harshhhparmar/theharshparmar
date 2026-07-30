@@ -5,6 +5,18 @@ import { ArrowUpRight, Github } from "lucide-react";
 
 const PROJECTS = [
   {
+    title: "NorthPeak",
+    subtitle: "AI SaaS & Productivity Tool",
+    description: "An AI-powered platform for streamlining workflows, boosting productivity, and automating tasks. Features advanced insights, file management, and smart dashboards.",
+    tech: ["Next.js", "React", "Tailwind CSS", "AI Integration"],
+    role: "Full Stack Developer",
+    badge: "SaaS Product",
+    category: "Full Stack",
+    featured: true,
+    githubLink: "https://github.com/harshhhparmar/NorthPeak",
+    liveLink: "https://north-peak-ecru.vercel.app/"
+  },
+  {
     title: "Back2U",
     subtitle: "Lost & Found Campus Portal",
     description: "A web-based lost and found platform for college campuses where students and staff can report lost items, upload found items, search listings, and connect with item owners.",
