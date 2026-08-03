@@ -4,6 +4,7 @@ import { Mail, Github, Linkedin, Check, MapPin, Clock, Loader2, Send } from "luc
 import React, { useState, useRef } from "react";
 import emailjs from '@emailjs/browser';
 import { toast } from 'sonner';
+import { supabase } from '../lib/supabase';
 
 export function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -15,15 +16,32 @@ export function Contact() {
     setIsSubmitting(true);
     
     try {
+      const formData = new FormData(form.current!);
+      const name = formData.get('user_name') as string;
+      const email = formData.get('user_email') as string;
+      const subject = formData.get('subject') as string;
+      const message = formData.get('message') as string;
+
+      // Save to Supabase
+      const { error: supabaseError } = await supabase
+        .from('inquiries')
+        .insert([
+          { name, email, subject, message }
+        ]);
+
+      if (supabaseError) {
+        console.error("Supabase Error:", supabaseError);
+        throw new Error("Failed to save to database");
+      }
+
       const env = (import.meta as any).env;
       const serviceId = env.VITE_EMAILJS_SERVICE_ID;
       const templateId = env.VITE_EMAILJS_TEMPLATE_ID;
       const publicKey = env.VITE_EMAILJS_PUBLIC_KEY;
 
       if (!serviceId || !templateId || !publicKey) {
-        // Fallback for demo if keys are missing
-        console.warn("EmailJS keys are missing. Simulating form submission.");
-        await new Promise(r => setTimeout(r, 1500));
+        // Fallback for demo if EmailJS keys are missing
+        console.warn("EmailJS keys are missing. Data saved to Supabase only.");
         setIsSuccess(true);
         toast.success("Message sent successfully!");
         form.current?.reset();
