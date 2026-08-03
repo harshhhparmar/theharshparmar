@@ -3,6 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
@@ -15,12 +16,13 @@ import { Process } from './components/Process';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { CustomCursor } from './components/CustomCursor';
+import { AdminPanel } from './components/AdminPanel';
 import { Analytics } from '@vercel/analytics/react';
 import { Toaster } from 'sonner';
 
-export default function App() {
+function Portfolio() {
   return (
-    <main className="min-h-screen bg-[#050505] text-white overflow-x-hidden selection:bg-brand selection:text-white">
+    <>
       <CustomCursor />
       <Navbar />
       <Hero />
@@ -33,8 +35,21 @@ export default function App() {
       <Process />
       <Contact />
       <Footer />
-      <Analytics />
-      <Toaster theme="dark" position="bottom-right" />
-    </main>
+    </>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <main className="min-h-screen bg-[#050505] text-white overflow-x-hidden selection:bg-brand selection:text-white">
+        <Routes>
+          <Route path="/" element={<Portfolio />} />
+          <Route path="/admin" element={<AdminPanel />} />
+        </Routes>
+        <Analytics />
+        <Toaster theme="dark" position="bottom-right" />
+      </main>
+    </BrowserRouter>
   );
 }

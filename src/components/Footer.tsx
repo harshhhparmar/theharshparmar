@@ -53,6 +53,13 @@ export function Footer() {
           >
             GitHub
           </motion.a>
+          <motion.a 
+            whileHover={{ y: -2 }}
+            href="/admin"
+            className="text-sm text-gray-500 hover:text-white transition-colors ml-4"
+          >
+            Admin Panel
+          </motion.a>
         </motion.div>
       </div>
     </footer>
