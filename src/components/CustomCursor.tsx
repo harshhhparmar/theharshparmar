@@ -41,10 +41,10 @@ export function CustomCursor() {
   return (
     <>
       <motion.div
-        className="fixed top-0 left-0 w-12 h-12 bg-white/[0.02] backdrop-blur-[4px] border border-brand/50 rounded-full pointer-events-none z-[9998] hidden md:block flex items-center justify-center shadow-[0_0_10px_rgba(252,110,96,0.1)]"
+        className="fixed top-0 left-0 w-8 h-8 bg-white/[0.02] backdrop-blur-[4px] border border-brand/50 rounded-full pointer-events-none z-[9998] hidden md:block flex items-center justify-center shadow-[0_0_10px_rgba(252,110,96,0.1)]"
         animate={{
-          x: mousePosition.x - 24,
-          y: mousePosition.y - 24,
+          x: mousePosition.x - 16,
+          y: mousePosition.y - 16,
           scale: isHovering ? 1.5 : 1,
         }}
         transition={{

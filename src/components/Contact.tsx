@@ -153,7 +153,6 @@ export function Contact() {
                       name="user_name"
                       required
                       className="bg-white/[0.02] backdrop-blur-sm border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand/50 focus:ring-1 focus:ring-brand/50 transition-all placeholder:text-gray-600"
-                      placeholder="John Doe"
                     />
                   </div>
                   <div className="flex flex-col gap-2">
@@ -164,7 +163,6 @@ export function Contact() {
                       name="user_email"
                       required
                       className="bg-white/[0.02] backdrop-blur-sm border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand/50 focus:ring-1 focus:ring-brand/50 transition-all placeholder:text-gray-600"
-                      placeholder="john@example.com"
                     />
                   </div>
                 </div>

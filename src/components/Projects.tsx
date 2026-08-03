@@ -38,7 +38,8 @@ const PROJECTS = [
     badge: "Academic + Real-world",
     category: "Full Stack",
     featured: true,
-    githubLink: "https://github.com/harshhhparmar/Back2U"
+    githubLink: "https://github.com/pratixa0310/Back2uwebapp",
+    liveLink: "https://back2uwebapp.vercel.app/auth"
   },
   {
     title: "Jay Computer Business",
