@@ -23,7 +23,6 @@ import { Toaster } from 'sonner';
 function Portfolio() {
   return (
     <>
-      <CustomCursor />
       <Navbar />
       <Hero />
       <About />
@@ -43,6 +42,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <main className="min-h-screen bg-[#050505] text-white overflow-x-hidden selection:bg-brand selection:text-white">
+        <CustomCursor />
         <Routes>
           <Route path="/" element={<Portfolio />} />
           <Route path="/admin" element={<AdminPanel />} />
