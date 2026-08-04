@@ -67,7 +67,7 @@ const PROJECTS = [
   },
 ];
 
-const CATEGORIES = ["All", "Web", "AI", "Tools"];
+const CATEGORIES = ["All", "Web", "AI"];
 
 export function Projects() {
   const [activeCategory, setActiveCategory] = useState("All");
