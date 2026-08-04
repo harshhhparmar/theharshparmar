@@ -13,7 +13,6 @@ const PROJECTS = [
     badge: "Client Business",
     category: "Web",
     featured: true,
-    image: "https://images.unsplash.com/photo-1615873968403-89e068629265?q=80&w=1600&auto=format&fit=crop",
     githubLink: "https://github.com/harshhhparmar/solenta.tiles",
     liveLink: "https://solentatiles.vercel.app/"
   },
@@ -26,7 +25,6 @@ const PROJECTS = [
     badge: "SaaS Product",
     category: "AI",
     featured: true,
-    image: "https://images.unsplash.com/photo-1661956602116-aa6865609028?q=80&w=1664&auto=format&fit=crop",
     githubLink: "https://github.com/harshhhparmar/NorthPeak",
     liveLink: "https://north-peak-ecru.vercel.app/"
   },
@@ -40,7 +38,6 @@ const PROJECTS = [
     badge: "Academic",
     category: "Web",
     featured: true,
-    image: "https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=1770&auto=format&fit=crop",
     githubLink: "https://github.com/pratixa0310/Back2uwebapp",
     liveLink: "https://back2uwebapp.vercel.app/auth"
   },
@@ -53,7 +50,6 @@ const PROJECTS = [
     badge: "Client Utility",
     category: "Web",
     featured: false,
-    image: "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=1770&auto=format&fit=crop",
     githubLink: "https://github.com/harshhhparmar/Jay-Computer-",
     liveLink: "https://jaycomputer.vercel.app/",
   },
@@ -66,7 +62,6 @@ const PROJECTS = [
     badge: "Client Business",
     category: "Web",
     featured: false,
-    image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=1770&auto=format&fit=crop",
     githubLink: "https://github.com/harshhhparmar/A2-Thai",
     liveLink: "https://a2-thai.vercel.app/",
   },
@@ -129,29 +124,12 @@ export function Projects() {
               onClick={() => setSelectedProject(project)}
               className="group cursor-pointer bg-white/[0.02] backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden flex flex-col transition-all duration-300 hover:bg-white/[0.04] hover:border-brand/40 shadow-lg hover:shadow-2xl"
             >
-              {project.image && (
-                <div className="h-44 w-full overflow-hidden relative border-b border-white/5">
-                  <img 
-                    src={project.image} 
-                    alt={project.title} 
-                    className="w-full h-full object-cover grayscale opacity-70 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-80" />
-                  <div className="absolute top-4 left-4">
-                    <span className="px-2.5 py-1 bg-black/60 backdrop-blur-md text-brand text-[10px] font-mono font-semibold uppercase tracking-wider rounded border border-white/10">
-                      {project.badge}
-                    </span>
-                  </div>
-                </div>
-              )}
               <div className="p-5 flex flex-col h-full">
                 <div className="flex justify-between items-start mb-4">
-                  {!project.image && (
-                    <span className="px-2.5 py-1 bg-brand/10 text-brand text-[10px] font-mono font-semibold uppercase tracking-wider rounded border border-brand/20">
-                      {project.badge}
-                    </span>
-                  )}
-                  <div className={`w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-brand group-hover:text-black transition-colors ${project.image ? 'ml-auto' : ''}`}>
+                  <span className="px-2.5 py-1 bg-brand/10 text-brand text-[10px] font-mono font-semibold uppercase tracking-wider rounded border border-brand/20">
+                    {project.badge}
+                  </span>
+                  <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-brand group-hover:text-black transition-colors">
                     <ArrowUpRight className="w-4 h-4" />
                   </div>
                 </div>
@@ -176,27 +154,27 @@ export function Projects() {
                   )}
                 </div>
                 
-                <div className="flex items-center gap-4 mt-auto pt-4 border-t border-white/5">
-                  {project.liveLink && (
-                    <a 
-                      href={project.liveLink} 
-                      target="_blank" 
-                      rel="noreferrer" 
-                      className="flex items-center gap-1.5 text-xs font-semibold text-white hover:text-brand transition-colors"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      Live Demo <ArrowUpRight size={14} />
-                    </a>
-                  )}
+                <div className="flex items-center justify-between gap-3 mt-auto pt-5 border-t border-white/10">
                   {project.githubLink && (
                     <a 
                       href={project.githubLink} 
                       target="_blank" 
                       rel="noreferrer" 
-                      className="flex items-center gap-1.5 text-xs font-medium text-gray-400 hover:text-white transition-colors"
+                      className="flex items-center justify-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 text-white text-xs font-medium rounded-lg transition-all flex-1"
                       onClick={(e) => e.stopPropagation()}
                     >
                       <Github size={14} /> GitHub
+                    </a>
+                  )}
+                  {project.liveLink && (
+                    <a 
+                      href={project.liveLink} 
+                      target="_blank" 
+                      rel="noreferrer" 
+                      className="flex items-center justify-center gap-2 px-4 py-2 bg-brand text-black text-xs font-semibold rounded-lg hover:bg-brand-light transition-all shadow-[0_0_15px_rgba(252,110,96,0.2)] hover:shadow-[0_0_20px_rgba(252,110,96,0.4)] flex-1"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      Live Demo <ArrowUpRight size={14} />
                     </a>
                   )}
                 </div>
@@ -225,19 +203,12 @@ export function Projects() {
             >
               <button 
                 onClick={() => setSelectedProject(null)}
-                className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-black/50 hover:bg-black/80 text-white transition-colors z-10 backdrop-blur-md"
+                className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 text-white transition-colors z-10 backdrop-blur-md"
               >
                 <X size={20} />
               </button>
 
-              {selectedProject.image && (
-                <div className="w-full h-64 sm:h-80 relative">
-                  <img src={selectedProject.image} alt={selectedProject.title} className="w-full h-full object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent" />
-                </div>
-              )}
-
-              <div className={`p-8 sm:p-10 ${selectedProject.image ? 'pt-0' : ''}`}>
+              <div className="p-8 sm:p-10">
                 <div className="flex items-center gap-3 mb-6">
                   <span className="px-3 py-1 bg-brand/10 text-brand text-xs font-mono font-semibold uppercase tracking-wider rounded-full border border-brand/20">
                     {selectedProject.badge}

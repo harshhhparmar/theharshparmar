@@ -13,7 +13,7 @@ const EXPERIENCES = [
   },
   {
     role: "Product Builder & Founder",
-    company: "gush.sh (AI SaaS)",
+    company: "NorthPeak Digital - SaaS Agency",
     date: "2025 - Present",
     icon: Globe,
     description: "Building an AI image generation SaaS platform. Architecting the frontend design, product positioning, and scalable storage solutions."
