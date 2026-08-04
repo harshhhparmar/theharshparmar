@@ -13,6 +13,7 @@ const PROJECTS = [
     badge: "Client Business",
     category: "Web",
     featured: true,
+    image: "https://images.unsplash.com/photo-1615873968403-89e068629265?q=80&w=1600&auto=format&fit=crop",
     githubLink: "https://github.com/harshhhparmar/solenta.tiles",
     liveLink: "https://solentatiles.vercel.app/"
   },
@@ -129,7 +130,7 @@ export function Projects() {
               className="group cursor-pointer bg-white/[0.02] backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden flex flex-col transition-all duration-300 hover:bg-white/[0.04] hover:border-brand/40 shadow-lg hover:shadow-2xl"
             >
               {project.image && (
-                <div className="h-48 w-full overflow-hidden relative border-b border-white/5">
+                <div className="h-44 w-full overflow-hidden relative border-b border-white/5">
                   <img 
                     src={project.image} 
                     alt={project.title} 
@@ -143,7 +144,7 @@ export function Projects() {
                   </div>
                 </div>
               )}
-              <div className="p-6 flex flex-col h-full">
+              <div className="p-5 flex flex-col h-full">
                 <div className="flex justify-between items-start mb-4">
                   {!project.image && (
                     <span className="px-2.5 py-1 bg-brand/10 text-brand text-[10px] font-mono font-semibold uppercase tracking-wider rounded border border-brand/20">
@@ -155,14 +156,14 @@ export function Projects() {
                   </div>
                 </div>
                 
-                <h3 className="font-display text-2xl font-bold text-white mb-2 group-hover:text-brand transition-colors">
+                <h3 className="font-display text-xl font-bold text-white mb-2 group-hover:text-brand transition-colors">
                   {project.title}
                 </h3>
-                <p className="text-sm text-gray-400 mb-6 line-clamp-2">
+                <p className="text-sm text-gray-400 mb-4 line-clamp-2">
                   {project.description}
                 </p>
                 
-                <div className="flex flex-wrap gap-2 mt-auto">
+                <div className="flex flex-wrap gap-2 mb-5">
                   {project.tech.slice(0, 3).map((tech) => (
                     <span key={tech} className="text-[10px] sm:text-xs font-mono text-gray-400 px-2 py-1 bg-black/40 rounded border border-white/5">
                       {tech}
@@ -172,6 +173,31 @@ export function Projects() {
                     <span className="text-[10px] sm:text-xs font-mono text-gray-500 px-2 py-1">
                       +{project.tech.length - 3}
                     </span>
+                  )}
+                </div>
+                
+                <div className="flex items-center gap-4 mt-auto pt-4 border-t border-white/5">
+                  {project.liveLink && (
+                    <a 
+                      href={project.liveLink} 
+                      target="_blank" 
+                      rel="noreferrer" 
+                      className="flex items-center gap-1.5 text-xs font-semibold text-white hover:text-brand transition-colors"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      Live Demo <ArrowUpRight size={14} />
+                    </a>
+                  )}
+                  {project.githubLink && (
+                    <a 
+                      href={project.githubLink} 
+                      target="_blank" 
+                      rel="noreferrer" 
+                      className="flex items-center gap-1.5 text-xs font-medium text-gray-400 hover:text-white transition-colors"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <Github size={14} /> GitHub
+                    </a>
                   )}
                 </div>
               </div>
