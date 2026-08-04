@@ -1,99 +1,57 @@
 import { Reveal, Section } from "./Section";
-import { Monitor, Server, Terminal, Database, Sparkles, Wrench } from "lucide-react";
-import { motion, useInView } from "motion/react";
-import React, { useRef } from "react";
+import { Monitor, Server, Terminal, Database, Sparkles, Wrench, Cloud, Layers } from "lucide-react";
+import { motion } from "motion/react";
+import React from "react";
 
 const SKILL_CATEGORIES = [
   {
     title: "Frontend",
     icon: Monitor,
-    skills: [
-      { name: "React", level: 90 },
-      { name: "Next.js", level: 80 },
-      { name: "HTML/CSS", level: 95 },
-      { name: "JavaScript", level: 85 },
-      { name: "Tailwind", level: 90 }
-    ],
+    skills: ["React", "Next.js", "TypeScript", "HTML/CSS", "JavaScript", "Tailwind CSS", "Framer Motion"],
   },
   {
     title: "Backend",
     icon: Server,
-    skills: [
-      { name: "Node.js", level: 80 },
-      { name: "Express", level: 75 },
-      { name: "Firebase", level: 85 },
-      { name: "REST APIs", level: 85 },
-    ],
+    skills: ["Node.js", "Express", "REST APIs", "GraphQL", "Firebase"],
   },
   {
     title: "Programming",
     icon: Terminal,
-    skills: [
-      { name: "Java", level: 70 },
-      { name: "Python", level: 65 },
-      { name: "C", level: 80 },
-    ],
+    skills: ["Java", "Python", "C", "C++", "TypeScript"],
   },
   {
     title: "Databases",
     icon: Database,
-    skills: [
-      { name: "MongoDB", level: 75 },
-      { name: "MySQL", level: 70 },
-    ],
+    skills: ["MongoDB", "MySQL", "PostgreSQL", "Supabase", "Redis"],
   },
   {
     title: "AI & Data",
     icon: Sparkles,
-    skills: [
-      { name: "Generative AI", level: 80 },
-      { name: "Prompt Engineering", level: 85 },
-      { name: "Data Analytics", level: 70 },
-    ],
+    skills: ["Generative AI", "Prompt Engineering", "Data Analytics", "Pandas", "NumPy"],
   },
   {
     title: "Tools",
     icon: Wrench,
-    skills: [
-      { name: "Git/GitHub", level: 85 },
-      { name: "VS Code", level: 95 },
-      { name: "Vercel", level: 90 },
-      { name: "Figma", level: 75 },
-    ],
+    skills: ["Git/GitHub", "VS Code", "Vercel", "Figma", "Postman", "Docker"],
   },
+  {
+    title: "Cloud",
+    icon: Cloud,
+    skills: ["AWS (Basic)", "Google Cloud", "Firebase", "Vercel"],
+  },
+  {
+    title: "Others",
+    icon: Layers,
+    skills: ["Agile/Scrum", "UI/UX Principles", "Open Source", "Technical Writing"],
+  }
 ];
-
-const SkillBar: React.FC<{ skill: { name: string; level: number } }> = ({ skill }) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-
-  return (
-    <div ref={ref} className="mb-4 last:mb-0">
-      <div className="flex justify-between items-center mb-2">
-        <span className="text-sm text-gray-300 font-medium">{skill.name}</span>
-        <span className="text-xs text-brand font-mono">{skill.level}%</span>
-      </div>
-      <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden border border-white/5">
-        <motion.div
-          initial={{ width: 0 }}
-          animate={isInView ? { width: `${skill.level}%` } : { width: 0 }}
-          transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-          className="h-full bg-gradient-to-r from-brand-dark to-brand rounded-full relative"
-        >
-          <div className="absolute top-0 right-0 bottom-0 w-10 bg-gradient-to-l from-white/20 to-transparent" />
-        </motion.div>
-      </div>
-    </div>
-  );
-}
 
 export function Skills() {
   return (
     <Section id="skills" className="bg-[#0a0a0a] relative overflow-hidden">
       {/* Ambient background glow for glassmorphism */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40rem] h-[40rem] bg-brand/5 rounded-full blur-[150px] pointer-events-none" />
-
-      <div className="text-center mb-16 md:mb-24 relative z-10">
+      <div className="text-center mb-12 relative z-10">
         <Reveal>
           <div className="inline-block font-mono text-brand text-sm tracking-[0.2em] uppercase mb-4">
             My Skills
@@ -102,47 +60,38 @@ export function Skills() {
             Technologies I work with.
           </h2>
           <p className="text-gray-400 text-[18px] max-w-2xl mx-auto font-light leading-[1.7]">
-            I enjoy building modern applications using scalable technologies and continuously learning emerging tools.
+            A consolidated view of the tools, languages, and frameworks I use to build scalable modern applications.
           </p>
         </Reveal>
       </div>
       
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 relative z-10">
         {SKILL_CATEGORIES.map((category, idx) => {
           const Icon = category.icon;
           return (
-            <Reveal key={category.title} delay={idx * 0.1}>
+            <Reveal key={category.title} delay={idx * 0.05}>
               <motion.div
-                whileHover="hover"
-                initial="initial"
-                className="group relative bg-white/[0.02] backdrop-blur-xl border border-white/10 rounded-[20px] p-8 h-full flex flex-col transition-all duration-300 hover:bg-white/[0.04] hover:border-brand/30 overflow-hidden"
+                whileHover={{ y: -5 }}
+                className="group relative bg-white/[0.02] backdrop-blur-xl border border-white/10 rounded-2xl p-6 h-full flex flex-col transition-all duration-300 hover:bg-white/[0.04] hover:border-brand/30 overflow-hidden"
               >
-                {/* Glow Effect */}
-                <div className="absolute inset-0 bg-gradient-to-br from-brand/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                
-                <div className="relative z-10 flex flex-col h-full">
-                  <motion.div 
-                    variants={{
-                      initial: { rotate: 0 },
-                      hover: { rotate: 5, scale: 1.1 }
-                    }}
-                    transition={{ duration: 0.3 }}
-                    className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white mb-6 group-hover:bg-brand group-hover:text-black group-hover:border-brand transition-colors duration-500"
-                  >
-                    <Icon size={24} />
-                  </motion.div>
-                  
-                  <h3 className="font-display text-2xl font-bold text-white mb-4">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white group-hover:bg-brand group-hover:text-black group-hover:border-brand transition-colors duration-500">
+                    <Icon size={18} />
+                  </div>
+                  <h3 className="font-display text-lg font-semibold text-white">
                     {category.title}
                   </h3>
-                  
-                  <div className="h-px w-full bg-white/10 mb-6 group-hover:bg-brand/20 transition-colors duration-500" />
-                  
-                  <div className="flex flex-col gap-1 w-full">
-                    {category.skills.map((skill) => (
-                      <SkillBar key={skill.name} skill={skill} />
-                    ))}
-                  </div>
+                </div>
+                
+                <div className="flex flex-wrap gap-2 mt-auto">
+                  {category.skills.map((skill) => (
+                    <span 
+                      key={skill} 
+                      className="text-[13px] font-medium text-gray-300 px-3 py-1.5 bg-white/5 rounded-lg border border-white/5 group-hover:border-white/10 transition-colors"
+                    >
+                      {skill}
+                    </span>
+                  ))}
                 </div>
               </motion.div>
             </Reveal>

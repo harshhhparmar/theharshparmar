@@ -1,6 +1,7 @@
+import { useState } from "react";
 import { Reveal, Section } from "./Section";
-import { motion } from "motion/react";
-import { Briefcase, Code2, Globe, GraduationCap } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
+import { Briefcase, Code2, Globe, GraduationCap, ChevronDown } from "lucide-react";
 
 const EXPERIENCES = [
   {
@@ -34,12 +35,14 @@ const EXPERIENCES = [
 ];
 
 export function Experience() {
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(0);
+
   return (
     <Section id="experience" className="bg-[#0a0a0a] relative overflow-hidden">
       {/* Ambient background glow for glassmorphism */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[30rem] h-[30rem] bg-brand/5 rounded-full blur-[150px] pointer-events-none" />
-
-      <div className="text-center mb-16 md:mb-24 relative z-10">
+      
+      <div className="text-center mb-12 relative z-10">
         <Reveal>
           <div className="inline-block font-mono text-brand text-sm tracking-[0.2em] uppercase mb-4">
             Journey
@@ -50,48 +53,63 @@ export function Experience() {
         </Reveal>
       </div>
       
-      <div className="max-w-4xl mx-auto relative">
-        {/* Timeline Line */}
-        <div className="absolute left-[27px] md:left-1/2 top-0 bottom-0 w-px bg-white/10 md:-translate-x-1/2" />
-
-        <div className="flex flex-col gap-12">
-          {EXPERIENCES.map((exp, i) => {
-            const Icon = exp.icon;
-            const isEven = i % 2 === 0;
-
-            return (
-              <Reveal key={i} delay={i * 0.15}>
-                <div className={`relative flex flex-col md:flex-row items-start ${isEven ? 'md:flex-row-reverse' : ''}`}>
-                  
-                  {/* Timeline Node */}
-                  <div className="absolute left-0 md:left-1/2 w-14 h-14 bg-white/[0.02] backdrop-blur-xl border border-white/10 rounded-full flex items-center justify-center text-brand z-10 md:-translate-x-1/2 group-hover:scale-110 transition-transform duration-300 shadow-xl">
-                    <Icon size={20} />
-                  </div>
-
-                  {/* Content */}
-                  <div className={`ml-20 md:ml-0 md:w-1/2 ${isEven ? 'md:pr-16 md:text-right' : 'md:pl-16 text-left'}`}>
-                    <motion.div 
-                      whileHover={{ y: -5 }}
-                      className="bg-white/[0.02] backdrop-blur-xl border border-white/10 rounded-[24px] p-6 sm:p-8 hover:bg-white/[0.04] hover:border-brand/30 transition-all duration-300 group"
-                    >
-                      <span className="inline-block text-xs font-mono text-brand mb-2 px-3 py-1 bg-brand/10 rounded-full">
+      <div className="max-w-3xl mx-auto relative z-10 flex flex-col gap-4">
+        {EXPERIENCES.map((exp, i) => {
+          const Icon = exp.icon;
+          const isExpanded = expandedIndex === i;
+          
+          return (
+            <Reveal key={i} delay={i * 0.1}>
+              <div 
+                onClick={() => setExpandedIndex(isExpanded ? null : i)}
+                className={`group cursor-pointer bg-white/[0.02] backdrop-blur-xl border transition-all duration-300 rounded-2xl overflow-hidden ${isExpanded ? 'border-brand/40 bg-white/[0.04]' : 'border-white/10 hover:border-white/20 hover:bg-white/[0.03]'}`}
+              >
+                <div className="p-5 sm:p-6 flex items-center justify-between gap-4">
+                  <div className="flex items-center gap-4 sm:gap-6 flex-1">
+                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-colors duration-300 shrink-0 ${isExpanded ? 'bg-brand/20 text-brand' : 'bg-white/5 text-gray-400 group-hover:text-brand'}`}>
+                      <Icon size={20} />
+                    </div>
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between flex-1 gap-1 sm:gap-4">
+                      <div>
+                        <h3 className="text-lg sm:text-xl font-display font-bold text-white group-hover:text-brand transition-colors">
+                          {exp.role}
+                        </h3>
+                        <h4 className="text-sm font-mono text-gray-400">{exp.company}</h4>
+                      </div>
+                      <span className="text-xs font-mono text-brand px-3 py-1 bg-brand/10 rounded-full w-fit whitespace-nowrap">
                         {exp.date}
                       </span>
-                      <h3 className="text-xl sm:text-2xl font-display font-bold text-white mb-1 group-hover:text-brand transition-colors duration-300">
-                        {exp.role}
-                      </h3>
-                      <h4 className="text-sm font-mono text-gray-400 mb-4">{exp.company}</h4>
-                      <p className="text-gray-400 text-sm sm:text-base leading-relaxed font-light">
-                        {exp.description}
-                      </p>
-                    </motion.div>
+                    </div>
                   </div>
-
+                  <motion.div 
+                    animate={{ rotate: isExpanded ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="shrink-0 text-gray-500 group-hover:text-white"
+                  >
+                    <ChevronDown size={20} />
+                  </motion.div>
                 </div>
-              </Reveal>
-            );
-          })}
-        </div>
+                
+                <AnimatePresence>
+                  {isExpanded && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                    >
+                      <div className="px-5 sm:px-6 pb-6 pt-2 border-t border-white/5">
+                        <p className="text-gray-400 text-sm sm:text-base leading-relaxed font-light pl-16 sm:pl-[72px]">
+                          {exp.description}
+                        </p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </Reveal>
+          );
+        })}
       </div>
     </Section>
   );

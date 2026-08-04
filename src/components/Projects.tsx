@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { Reveal, Section } from "./Section";
 import { motion, AnimatePresence } from "motion/react";
-import { ArrowUpRight, Github } from "lucide-react";
+import { ArrowUpRight, Github, X } from "lucide-react";
 
 const PROJECTS = [
   {
@@ -11,7 +11,7 @@ const PROJECTS = [
     tech: ["React", "Next.js", "Tailwind CSS", "Vercel"],
     role: "Frontend Developer",
     badge: "Client Business",
-    category: "Frontend",
+    category: "Web",
     featured: true,
     githubLink: "https://github.com/harshhhparmar/solenta.tiles",
     liveLink: "https://solentatiles.vercel.app/"
@@ -23,8 +23,9 @@ const PROJECTS = [
     tech: ["Next.js", "React", "Tailwind CSS", "AI Integration"],
     role: "Full Stack Developer",
     badge: "SaaS Product",
-    category: "Full Stack",
+    category: "AI",
     featured: true,
+    image: "https://images.unsplash.com/photo-1661956602116-aa6865609028?q=80&w=1664&auto=format&fit=crop",
     githubLink: "https://github.com/harshhhparmar/NorthPeak",
     liveLink: "https://north-peak-ecru.vercel.app/"
   },
@@ -33,23 +34,25 @@ const PROJECTS = [
     subtitle: "Lost & Found Campus Portal",
     description: "A web-based lost and found platform for college campuses where students and staff can report lost items, upload found items, search listings, and connect with item owners.",
     problemSolved: "Reduces confusion and improves recovery of lost items inside college campuses.",
-    tech: ["MERN", "React", "Firebase Auth", "Responsive UI"],
-    role: "Project Team Lead / Developer",
-    badge: "Academic + Real-world",
-    category: "Full Stack",
+    tech: ["MERN", "React", "Firebase", "Responsive UI"],
+    role: "Project Team Lead",
+    badge: "Academic",
+    category: "Web",
     featured: true,
+    image: "https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=1770&auto=format&fit=crop",
     githubLink: "https://github.com/pratixa0310/Back2uwebapp",
     liveLink: "https://back2uwebapp.vercel.app/auth"
   },
   {
-    title: "Jay Computer Business",
+    title: "Jay Computer",
     subtitle: "Service Website",
     description: "A business website built for a local digital service business, helping users access government scheme info, documents, and online services.",
     tech: ["Web Dev", "Vercel", "Responsive"],
     role: "Developer / Builder",
     badge: "Client Utility",
-    category: "Frontend",
+    category: "Web",
     featured: false,
+    image: "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=1770&auto=format&fit=crop",
     githubLink: "https://github.com/harshhhparmar/Jay-Computer-",
     liveLink: "https://jaycomputer.vercel.app/",
   },
@@ -60,17 +63,19 @@ const PROJECTS = [
     tech: ["React", "Tailwind CSS", "Vercel", "Responsive"],
     role: "Developer / Builder",
     badge: "Client Business",
-    category: "Frontend",
+    category: "Web",
     featured: false,
+    image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=1770&auto=format&fit=crop",
     githubLink: "https://github.com/harshhhparmar/A2-Thai",
     liveLink: "https://a2-thai.vercel.app/",
   },
 ];
 
-const CATEGORIES = ["All", "Full Stack", "Frontend"];
+const CATEGORIES = ["All", "Web", "AI", "Tools"];
 
 export function Projects() {
   const [activeCategory, setActiveCategory] = useState("All");
+  const [selectedProject, setSelectedProject] = useState<typeof PROJECTS[0] | null>(null);
 
   const filteredProjects = useMemo(() => {
     if (activeCategory === "All") return PROJECTS;
@@ -79,25 +84,25 @@ export function Projects() {
 
   return (
     <Section id="projects" className="bg-[#050505] relative overflow-hidden">
-      {/* Ambient background glows for glassmorphism */}
+      {/* Ambient background glows */}
       <div className="absolute top-1/4 left-0 w-96 h-96 bg-brand/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-0 w-[30rem] h-[30rem] bg-brand/5 rounded-full blur-[150px] pointer-events-none" />
       
-      <div className="text-center mb-12 md:mb-20 relative z-10">
+      <div className="text-center mb-12 relative z-10">
         <Reveal>
           <div className="inline-block font-mono text-brand text-sm tracking-[0.2em] uppercase mb-4">
             Selected Work
           </div>
-          <h2 className="font-display text-4xl md:text-[48px] leading-[1.1] font-bold text-white mb-10">
+          <h2 className="font-display text-4xl md:text-[48px] leading-[1.1] font-bold text-white mb-8">
             Projects I've Built.
           </h2>
           
-          <div className="flex flex-wrap justify-center gap-3">
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
             {CATEGORIES.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                className={`px-4 py-1.5 sm:px-5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 ${
                   activeCategory === cat 
                     ? "bg-brand text-black shadow-[0_0_15px_rgba(252,110,96,0.3)]" 
                     : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-gray-200 border border-white/5"
@@ -110,82 +115,63 @@ export function Projects() {
         </Reveal>
       </div>
       
-      <motion.div layout className="grid gap-8 md:gap-12">
+      <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
         <AnimatePresence mode="popLayout">
-          {filteredProjects.map((project, idx) => (
+          {filteredProjects.map((project) => (
             <motion.div
               layout
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.3 }}
               key={project.title}
-              className={`interactive-hover group relative bg-white/[0.02] backdrop-blur-xl border border-white/10 rounded-[32px] overflow-hidden flex flex-col ${project.featured ? 'lg:flex-row' : ''} transition-all duration-500 hover:bg-white/[0.04] hover:border-white/20`}
+              onClick={() => setSelectedProject(project)}
+              className="group cursor-pointer bg-white/[0.02] backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden flex flex-col transition-all duration-300 hover:bg-white/[0.04] hover:border-brand/40 shadow-lg hover:shadow-2xl"
             >
-              {/* Image Section (for featured projects) */}
-              {project.featured && 'image' in project && project.image && (
-                <div className="lg:w-5/12 relative overflow-hidden bg-[#0a0a0a]">
-                  <motion.div
-                    variants={{
-                      initial: { scale: 1 },
-                      hover: { scale: 1.05 }
-                    }}
-                    transition={{ duration: 0.7, ease: "easeOut" }}
-                    className="absolute inset-0"
-                  >
-                    <img 
-                      src={project.image as string} 
-                      alt={project.title} 
-                      className="w-full h-full object-cover opacity-60 grayscale group-hover:grayscale-0 transition-all duration-700" 
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-transparent to-transparent lg:bg-gradient-to-r" />
-                  </motion.div>
+              {project.image && (
+                <div className="h-48 w-full overflow-hidden relative border-b border-white/5">
+                  <img 
+                    src={project.image} 
+                    alt={project.title} 
+                    className="w-full h-full object-cover grayscale opacity-70 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-80" />
+                  <div className="absolute top-4 left-4">
+                    <span className="px-2.5 py-1 bg-black/60 backdrop-blur-md text-brand text-[10px] font-mono font-semibold uppercase tracking-wider rounded border border-white/10">
+                      {project.badge}
+                    </span>
+                  </div>
                 </div>
               )}
-
-              {/* Content Section */}
-              <div className={`p-8 md:p-12 relative z-10 flex-1 flex flex-col justify-center`}>
-                <div className="flex flex-wrap items-center gap-3 md:gap-4 mb-6">
-                  <span className="px-3 py-1 bg-brand/10 text-brand text-[10px] sm:text-xs font-mono font-semibold uppercase tracking-wider rounded-full border border-brand/20">
-                    {project.badge}
-                  </span>
-                  <span className="text-gray-500 text-xs sm:text-sm font-mono">{project.role}</span>
+              <div className="p-6 flex flex-col h-full">
+                <div className="flex justify-between items-start mb-4">
+                  {!project.image && (
+                    <span className="px-2.5 py-1 bg-brand/10 text-brand text-[10px] font-mono font-semibold uppercase tracking-wider rounded border border-brand/20">
+                      {project.badge}
+                    </span>
+                  )}
+                  <div className={`w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-brand group-hover:text-black transition-colors ${project.image ? 'ml-auto' : ''}`}>
+                    <ArrowUpRight className="w-4 h-4" />
+                  </div>
                 </div>
                 
-                <h3 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 group-hover:text-brand transition-colors duration-300">
+                <h3 className="font-display text-2xl font-bold text-white mb-2 group-hover:text-brand transition-colors">
                   {project.title}
                 </h3>
-                <p className="text-lg md:text-xl text-gray-400 mb-6 font-light">{project.subtitle}</p>
-                
-                <p className="text-base text-gray-300 leading-[1.7] mb-8 max-w-2xl font-light">
+                <p className="text-sm text-gray-400 mb-6 line-clamp-2">
                   {project.description}
                 </p>
-
-                {project.problemSolved && (
-                  <div className="mb-8 p-5 bg-black/40 rounded-2xl border border-white/5 max-w-2xl backdrop-blur-md">
-                    <span className="block text-brand text-xs font-mono uppercase tracking-wider mb-2">Problem Solved</span>
-                    <span className="text-sm text-gray-300 leading-relaxed font-light">{project.problemSolved}</span>
-                  </div>
-                )}
-
-                <div className="flex flex-wrap gap-2 mb-10">
-                  {project.tech.map((tech) => (
-                    <span key={tech} className="text-xs font-mono text-gray-400 px-3 py-1.5 bg-[#050505] rounded-md border border-white/5">
+                
+                <div className="flex flex-wrap gap-2 mt-auto">
+                  {project.tech.slice(0, 3).map((tech) => (
+                    <span key={tech} className="text-[10px] sm:text-xs font-mono text-gray-400 px-2 py-1 bg-black/40 rounded border border-white/5">
                       {tech}
                     </span>
                   ))}
-                </div>
-
-                <div className="flex gap-4 mt-auto">
-                  {project.liveLink && (
-                    <a href={project.liveLink} target="_blank" rel="noreferrer" className="flex items-center gap-2 px-6 py-3 bg-brand text-black font-semibold text-sm rounded-full hover:bg-brand-light transition-colors shadow-lg hover:shadow-brand/25">
-                      Live Project <ArrowUpRight size={16} />
-                    </a>
-                  )}
-                  {project.githubLink && (
-                    <a href={project.githubLink} target="_blank" rel="noreferrer" className="flex items-center gap-2 px-6 py-3 bg-transparent border border-white/20 text-white font-medium text-sm rounded-full hover:bg-white/5 transition-colors">
-                      <Github size={16} /> View Code
-                    </a>
+                  {project.tech.length > 3 && (
+                    <span className="text-[10px] sm:text-xs font-mono text-gray-500 px-2 py-1">
+                      +{project.tech.length - 3}
+                    </span>
                   )}
                 </div>
               </div>
@@ -193,6 +179,98 @@ export function Projects() {
           ))}
         </AnimatePresence>
       </motion.div>
+
+      {/* Modal */}
+      <AnimatePresence>
+        {selectedProject && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md"
+            onClick={() => setSelectedProject(null)}
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 50, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 20, scale: 0.95 }}
+              onClick={(e) => e.stopPropagation()}
+              className="w-full max-w-2xl bg-[#0a0a0a] border border-white/10 rounded-3xl overflow-hidden shadow-2xl relative max-h-[90vh] overflow-y-auto"
+            >
+              <button 
+                onClick={() => setSelectedProject(null)}
+                className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-black/50 hover:bg-black/80 text-white transition-colors z-10 backdrop-blur-md"
+              >
+                <X size={20} />
+              </button>
+
+              {selectedProject.image && (
+                <div className="w-full h-64 sm:h-80 relative">
+                  <img src={selectedProject.image} alt={selectedProject.title} className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent" />
+                </div>
+              )}
+
+              <div className={`p-8 sm:p-10 ${selectedProject.image ? 'pt-0' : ''}`}>
+                <div className="flex items-center gap-3 mb-6">
+                  <span className="px-3 py-1 bg-brand/10 text-brand text-xs font-mono font-semibold uppercase tracking-wider rounded-full border border-brand/20">
+                    {selectedProject.badge}
+                  </span>
+                  <span className="text-gray-500 text-sm font-mono">{selectedProject.role}</span>
+                </div>
+
+                <h3 className="font-display text-3xl sm:text-4xl font-bold text-white mb-2">
+                  {selectedProject.title}
+                </h3>
+                <p className="text-lg text-brand font-light mb-8">
+                  {selectedProject.subtitle}
+                </p>
+
+                <div className="space-y-6 mb-10">
+                  <div>
+                    <h4 className="text-white font-medium mb-2">Overview</h4>
+                    <p className="text-gray-400 text-sm sm:text-base leading-relaxed">
+                      {selectedProject.description}
+                    </p>
+                  </div>
+                  {/* @ts-ignore */}
+                  {selectedProject.problemSolved && (
+                    <div className="p-5 bg-white/5 rounded-2xl border border-white/10">
+                      <h4 className="text-brand text-sm font-mono uppercase tracking-wider mb-2">Problem Solved</h4>
+                      {/* @ts-ignore */}
+                      <p className="text-gray-300 text-sm leading-relaxed">{selectedProject.problemSolved}</p>
+                    </div>
+                  )}
+                </div>
+
+                <div className="mb-10">
+                  <h4 className="text-white font-medium mb-3">Technologies</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedProject.tech.map((tech) => (
+                      <span key={tech} className="text-xs font-mono text-gray-400 px-3 py-1.5 bg-black rounded-lg border border-white/5">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap gap-4 pt-6 border-t border-white/10">
+                  {selectedProject.liveLink && (
+                    <a href={selectedProject.liveLink} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 px-6 py-3 bg-brand text-black font-semibold text-sm rounded-full hover:bg-brand-light transition-colors flex-1 sm:flex-none">
+                      Live Project <ArrowUpRight size={16} />
+                    </a>
+                  )}
+                  {selectedProject.githubLink && (
+                    <a href={selectedProject.githubLink} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 px-6 py-3 bg-transparent border border-white/20 text-white font-medium text-sm rounded-full hover:bg-white/5 transition-colors flex-1 sm:flex-none">
+                      <Github size={16} /> View Code
+                    </a>
+                  )}
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </Section>
   );
 }
