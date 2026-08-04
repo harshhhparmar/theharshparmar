@@ -84,6 +84,10 @@ export function About() {
             <div className="flex flex-wrap gap-4">
               <a 
                 href="#contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+                }}
                 className="flex items-center gap-2 px-8 py-4 bg-brand text-black font-medium rounded-full hover:bg-brand-light transition-colors shadow-lg hover:shadow-brand/25"
               >
                 Let's Connect

@@ -83,6 +83,10 @@ export function Navbar() {
                 <a
                   key={link.name}
                   href={link.href}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' });
+                  }}
                   className="group relative flex flex-col text-sm font-medium text-gray-400 hover:text-white transition-colors"
                 >
                   <span className={cn("font-mono text-[10px] uppercase mb-0.5 transition-colors", isActive ? "text-brand" : "text-brand/50 group-hover:text-brand")}>
@@ -100,6 +104,10 @@ export function Navbar() {
             })}
             <a
               href="#contact"
+              onClick={(e) => {
+                e.preventDefault();
+                document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+              }}
               className="ml-4 px-6 py-2.5 rounded-full border border-white/20 text-white text-sm font-medium hover:bg-white hover:text-black transition-all duration-300 pointer-events-auto shadow-lg"
             >
               Hire Me
@@ -132,7 +140,11 @@ export function Navbar() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: idx * 0.1 }}
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' });
+                  setIsMobileMenuOpen(false);
+                }}
                 className="text-3xl font-display font-medium text-white flex items-center gap-6 group"
               >
                 <span className="font-mono text-brand text-sm group-hover:translate-x-2 transition-transform">{link.num}</span>

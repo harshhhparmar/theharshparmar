@@ -108,6 +108,10 @@ export function Hero() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               href="#projects"
+              onClick={(e) => {
+                e.preventDefault();
+                document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' });
+              }}
               className="group flex items-center gap-2 bg-brand text-black px-8 py-4 rounded-full font-medium transition-shadow duration-300 shadow-[0_0_20px_rgba(252,110,96,0.3)] hover:shadow-[0_0_30px_rgba(252,110,96,0.5)]"
             >
               View Projects
