@@ -119,10 +119,12 @@ export function Projects() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
+              whileHover={{ scale: 1.02, y: -5 }}
+              whileTap={{ scale: 0.98 }}
               transition={{ duration: 0.3 }}
               key={project.title}
               onClick={() => setSelectedProject(project)}
-              className="group cursor-pointer bg-white/[0.02] backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden flex flex-col transition-all duration-300 hover:bg-white/[0.04] hover:border-brand/40 shadow-lg hover:shadow-2xl"
+              className="group cursor-pointer bg-white/[0.02] backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden flex flex-col transition-all duration-300 hover:bg-white/[0.04] hover:border-brand/40 shadow-lg hover:shadow-2xl hover:shadow-brand/10"
             >
               <div className="p-5 flex flex-col h-full">
                 <div className="flex justify-between items-start mb-4">
