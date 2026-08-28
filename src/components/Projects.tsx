@@ -100,28 +100,31 @@ export function Projects() {
               transition={{ duration: 0.3 }}
               key={project.title}
               onClick={() => setSelectedProject(project)}
-              className="group cursor-pointer bg-white/[0.02] backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden flex flex-col transition-all duration-300 hover:bg-white/[0.04] hover:border-brand/40 shadow-lg hover:shadow-2xl hover:shadow-brand/10"
+              className="group cursor-pointer bg-white/[0.02] backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden flex flex-col transition-all duration-500 hover:bg-white/[0.05] hover:border-brand/40 shadow-lg hover:shadow-2xl hover:shadow-brand/20 relative"
             >
-              <div className="p-5 flex flex-col h-full">
+              {/* Subtle gradient overlay on hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-brand/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+              
+              <div className="p-5 flex flex-col h-full relative z-10">
                 <div className="flex justify-between items-start mb-4">
                   <span className="px-2.5 py-1 bg-brand/10 text-brand text-[10px] font-mono font-semibold uppercase tracking-wider rounded border border-brand/20">
                     {project.badge}
                   </span>
-                  <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-brand group-hover:text-black transition-colors">
+                  <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-brand group-hover:text-black group-hover:scale-110 transition-all duration-300">
                     <ArrowUpRight className="w-4 h-4" />
                   </div>
                 </div>
                 
-                <h3 className="font-display text-xl font-bold text-white mb-2 group-hover:text-brand transition-colors">
+                <h3 className="font-display text-xl font-bold text-white mb-2 group-hover:text-brand transition-colors duration-300">
                   {project.title}
                 </h3>
-                <p className="text-sm text-gray-400 mb-4 line-clamp-2">
+                <p className="text-sm text-gray-400 mb-4 line-clamp-2 group-hover:text-gray-300 transition-colors duration-300">
                   {project.description}
                 </p>
                 
                 <div className="flex flex-wrap gap-2 mb-5">
                   {project.tech.slice(0, 3).map((tech) => (
-                    <span key={tech} className="text-[10px] sm:text-xs font-mono text-gray-400 px-2 py-1 bg-black/40 rounded border border-white/5">
+                    <span key={tech} className="text-[10px] sm:text-xs font-mono text-gray-400 px-2 py-1 bg-black/40 rounded border border-white/5 group-hover:bg-brand/10 group-hover:text-brand-light group-hover:border-brand/20 transition-all duration-300">
                       {tech}
                     </span>
                   ))}
