@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { Reveal, Section } from "./Section";
 import { motion, AnimatePresence } from "motion/react";
 import { ArrowUpRight, Github, X } from "lucide-react";
@@ -67,16 +67,8 @@ const PROJECTS = [
   },
 ];
 
-const CATEGORIES = ["All", "Web", "AI"];
-
 export function Projects() {
-  const [activeCategory, setActiveCategory] = useState("All");
   const [selectedProject, setSelectedProject] = useState<typeof PROJECTS[0] | null>(null);
-
-  const filteredProjects = useMemo(() => {
-    if (activeCategory === "All") return PROJECTS;
-    return PROJECTS.filter(p => p.category === activeCategory);
-  }, [activeCategory]);
 
   return (
     <Section id="projects" className="bg-[#050505] relative overflow-hidden">
@@ -92,28 +84,12 @@ export function Projects() {
           <h2 className="font-display text-4xl md:text-[48px] leading-[1.1] font-bold text-white mb-8">
             Projects I've Built.
           </h2>
-          
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
-            {CATEGORIES.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`px-4 py-1.5 sm:px-5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 ${
-                  activeCategory === cat 
-                    ? "bg-brand text-black shadow-[0_0_15px_rgba(252,110,96,0.3)]" 
-                    : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-gray-200 border border-white/5"
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
         </Reveal>
       </div>
       
       <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
         <AnimatePresence mode="popLayout">
-          {filteredProjects.map((project) => (
+          {PROJECTS.map((project) => (
             <motion.div
               layout
               initial={{ opacity: 0, scale: 0.9 }}
