@@ -10,14 +10,18 @@ interface SectionProps {
 
 export function Section({ id, className, children }: SectionProps) {
   return (
-    <section
+    <motion.section
       id={id}
+      initial={{ opacity: 0, y: 60 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
       className={cn("py-12 sm:py-16 md:py-20 lg:py-24 w-full", className)}
     >
       <div className="max-w-7xl mx-auto px-5 sm:px-8 md:px-12 xl:px-8">
         {children}
       </div>
-    </section>
+    </motion.section>
   );
 }
 
