@@ -19,6 +19,7 @@ import { CustomCursor } from './components/CustomCursor';
 import { AdminPanel } from './components/AdminPanel';
 import { Analytics } from '@vercel/analytics/react';
 import { Toaster } from 'sonner';
+import { BackToTop } from './components/BackToTop';
 
 function Portfolio() {
   return (
@@ -34,6 +35,7 @@ function Portfolio() {
       <Process />
       <Contact />
       <Footer />
+      <BackToTop />
     </>
   );
 }
