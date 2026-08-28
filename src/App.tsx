@@ -20,6 +20,7 @@ import { AdminPanel } from './components/AdminPanel';
 import { Analytics } from '@vercel/analytics/react';
 import { Toaster } from 'sonner';
 import { BackToTop } from './components/BackToTop';
+import { ScrollProgress } from './components/ScrollProgress';
 
 function Portfolio() {
   return (
@@ -44,6 +45,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <main className="min-h-screen bg-[#050505] text-white overflow-x-hidden selection:bg-brand selection:text-white">
+        <ScrollProgress />
         <CustomCursor />
         <Routes>
           <Route path="/" element={<Portfolio />} />
