@@ -5,6 +5,19 @@ import { ArrowUpRight, Github, X } from "lucide-react";
 
 const PROJECTS = [
   {
+    title: "LeadDesk Mini",
+    subtitle: "Lead Management Mini-CRM",
+    description: "A full-stack lead management mini-CRM allowing businesses to capture incoming leads from a conversion-optimized landing page and manage them within a secure, authenticated admin dashboard.",
+    problemSolved: "Streamlines lead capture, real-time status tracking (New, Contacted, Closed), and live search with role-protected Firestore security.",
+    tech: ["React", "TypeScript", "Firebase", "Tailwind CSS", "Vercel"],
+    role: "Full Stack Developer",
+    badge: "SaaS / CRM",
+    category: "Web",
+    featured: true,
+    githubLink: "https://github.com/harshhhparmar/LeadDesk-Mini-",
+    liveLink: "https://lead-desk-mini-dh.vercel.app/"
+  },
+  {
     title: "DoraPocket",
     subtitle: "Birthday Website Generator",
     description: "A Doraemon-inspired customizable birthday website builder to create a personalized digital world full of memories, smiles, and interactive birthday wishes.",
