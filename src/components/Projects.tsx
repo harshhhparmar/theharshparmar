@@ -5,6 +5,18 @@ import { ArrowUpRight, Github, X } from "lucide-react";
 
 const PROJECTS = [
   {
+    title: "DoraPocket",
+    subtitle: "Birthday Website Generator",
+    description: "A Doraemon-inspired customizable birthday website builder to create a personalized digital world full of memories, smiles, and interactive birthday wishes.",
+    tech: ["React", "TypeScript", "Tailwind CSS", "Vercel"],
+    role: "Creator & Developer",
+    badge: "Web App",
+    category: "Web",
+    featured: true,
+    githubLink: "https://github.com/harshhhparmar/DoraPocket",
+    liveLink: "https://dora-pocket-birthday-site-generator.vercel.app/"
+  },
+  {
     title: "Solenta Tiles",
     subtitle: "Premium Tile Showcase Platform",
     description: "A modern web application showcasing premium tile collections with an elegant user interface, responsive design, and smooth visual experience.",
