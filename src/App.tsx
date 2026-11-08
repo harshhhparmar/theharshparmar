@@ -15,7 +15,6 @@ import { Experience } from './components/Experience';
 import { Process } from './components/Process';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
-import { CustomCursor } from './components/CustomCursor';
 import { AdminPanel } from './components/AdminPanel';
 import { Analytics } from '@vercel/analytics/react';
 import { Toaster } from 'sonner';
@@ -46,7 +45,6 @@ export default function App() {
     <BrowserRouter>
       <main className="min-h-screen bg-[#050505] text-white overflow-x-hidden selection:bg-brand selection:text-white">
         <ScrollProgress />
-        <CustomCursor />
         <Routes>
           <Route path="/" element={<Portfolio />} />
           <Route path="/admin" element={<AdminPanel />} />

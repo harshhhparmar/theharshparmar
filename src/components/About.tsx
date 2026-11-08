@@ -1,8 +1,10 @@
 import { Reveal, Section } from "./Section";
-import { Download, MapPin, GraduationCap, Building2, Calendar, Languages } from "lucide-react";
+import { MapPin, GraduationCap, Building2, Calendar, Languages } from "lucide-react";
 import { motion } from "motion/react";
+import { usePortraitImage } from "../lib/portrait";
 
 export function About() {
+  const { portraitSrc } = usePortraitImage();
   const INFO_CARDS = [
     { icon: MapPin, label: "Location", value: "Ahmedabad, Gujarat" },
     { icon: GraduationCap, label: "Education", value: "Computer Engineering" },
@@ -24,26 +26,19 @@ export function About() {
               {/* Decorative Gradient Background */}
               <div className="absolute inset-0 bg-gradient-to-br from-brand/20 via-transparent to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
               
-              {/* Photo Placeholder */}
-              <div className="absolute inset-0 flex items-center justify-center text-white/5">
-                <span className="font-display font-bold text-6xl rotate-[-10deg]">HP</span>
-              </div>
               <img 
-                src="https://images.unsplash.com/photo-1605379399642-870262d3d051?q=80&w=906&auto=format&fit=crop" 
+                src={portraitSrc} 
                 alt="Harsh Parmar" 
-                className="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-60 grayscale group-hover:grayscale-0 group-hover:mix-blend-normal transition-all duration-700"
+                referrerPolicy="no-referrer"
+                className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.02]"
               />
 
               {/* Badges */}
               <motion.div 
                 animate={{ y: [5, -5, 5] }}
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute bottom-6 -left-6 lg:-left-8 bg-white text-black px-4 py-2 rounded-full shadow-xl flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-wider"
+                className="absolute bottom-6 left-6 bg-white text-black px-4 py-2 rounded-full shadow-xl flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-wider"
               >
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-brand"></span>
-                </span>
                 Available for Internship
               </motion.div>
             </div>

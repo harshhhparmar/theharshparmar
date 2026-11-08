@@ -24,8 +24,3 @@ html {
   scroll-behavior: smooth;
 }
 
-@media (min-width: 768px) and (pointer: fine) {
-  * {
-    cursor: none !important;
-  }
-}
