@@ -1,15 +1,13 @@
 import { motion } from "motion/react";
-import { ArrowRight, Github, Linkedin, Camera, Mail } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { ArrowRight, Github, Linkedin, Mail } from "lucide-react";
+import { useEffect, useState } from "react";
 import { usePortraitImage } from "../lib/portrait";
 
 const TYPING_TEXT = "Building useful web products with code, ";
 
 export function Hero() {
   const [typedText, setTypedText] = useState("");
-  const { portraitSrc, updatePortraitFile } = usePortraitImage();
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const [isDragging, setIsDragging] = useState(false);
+  const { portraitSrc } = usePortraitImage();
 
   useEffect(() => {
     let i = 0;
@@ -123,27 +121,8 @@ export function Hero() {
 
           {/* Right Column - Single Studio Portrait Card (4 Cols) */}
           <div className="lg:col-span-4 flex">
-            <div
-              onDragOver={(e) => {
-                e.preventDefault();
-                setIsDragging(true);
-              }}
-              onDragLeave={() => setIsDragging(false)}
-              onDrop={(e) => {
-                e.preventDefault();
-                setIsDragging(false);
-                const file = e.dataTransfer.files?.[0];
-                if (file && file.type.startsWith("image/")) {
-                  updatePortraitFile(file);
-                }
-              }}
-              className="relative w-full group flex flex-col"
-            >
-              <div
-                className={`relative flex-1 min-h-[300px] sm:min-h-[340px] lg:min-h-full rounded-2xl overflow-hidden border transition-all duration-200 bg-[#111111] ${
-                  isDragging ? "border-brand ring-2 ring-brand/40" : "border-white/15 group-hover:border-brand/40"
-                }`}
-              >
+            <div className="relative w-full group flex flex-col">
+              <div className="relative flex-1 min-h-[300px] sm:min-h-[340px] lg:min-h-full rounded-2xl overflow-hidden border border-white/15 group-hover:border-brand/40 transition-all duration-200 bg-[#111111]">
                 <img
                   src={portraitSrc}
                   alt="Harsh Parmar — Professional Portrait"
@@ -153,27 +132,6 @@ export function Hero() {
 
                 {/* Measured Bottom Scrim */}
                 <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/90 via-black/45 to-transparent pointer-events-none" />
-
-                {/* Upload / Replace Portrait Action */}
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  accept="image/*"
-                  className="hidden"
-                  onChange={(e) => {
-                    const file = e.target.files?.[0];
-                    if (file) updatePortraitFile(file);
-                  }}
-                />
-                <button
-                  type="button"
-                  onClick={() => fileInputRef.current?.click()}
-                  title="Click or drag & drop your portrait photo to update"
-                  className="absolute top-3 right-3 z-20 flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-black/70 hover:bg-black/90 text-white/90 text-[11px] font-mono border border-white/15 opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity duration-200 backdrop-blur-md cursor-pointer whitespace-nowrap shrink-0"
-                >
-                  <Camera size={12} className="text-brand" />
-                  Change Photo
-                </button>
 
                 {/* Caption inside Frame */}
                 <div className="absolute bottom-3.5 inset-x-4 flex items-end justify-between z-10 pointer-events-none">
