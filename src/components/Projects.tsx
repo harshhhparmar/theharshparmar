@@ -5,17 +5,17 @@ import { ArrowUpRight, Github, X } from "lucide-react";
 
 const PROJECTS = [
   {
-    title: "LeadDesk Mini",
-    subtitle: "Lead Management Mini-CRM",
-    description: "A full-stack lead management mini-CRM allowing businesses to capture incoming leads from a conversion-optimized landing page and manage them within a secure, authenticated admin dashboard.",
-    problemSolved: "Streamlines lead capture, real-time status tracking (New, Contacted, Closed), and live search with role-protected Firestore security.",
-    tech: ["React", "TypeScript", "Firebase", "Tailwind CSS", "Vercel"],
-    role: "Full Stack Developer",
-    badge: "SaaS / CRM",
+    title: "Jay Computer",
+    subtitle: "Service Website",
+    description: "A business website built for a local digital service business, helping users access government scheme info, documents, and online services.",
+    tech: ["Web Dev", "Vercel", "Responsive"],
+    role: "Developer / Builder",
+    badge: "Featured · Client Utility",
     category: "Web",
     featured: true,
-    githubLink: "https://github.com/harshhhparmar/LeadDesk-Mini-",
-    liveLink: "https://lead-desk-mini-dh.vercel.app/"
+    highlighted: true,
+    githubLink: "https://github.com/harshhhparmar/Jay-Computer-",
+    liveLink: "https://jaycomputer.vercel.app/",
   },
   {
     title: "DoraPocket",
@@ -42,18 +42,6 @@ const PROJECTS = [
     liveLink: "https://solentatiles.vercel.app/"
   },
   {
-    title: "NorthPeak",
-    subtitle: "AI SaaS & Productivity Tool",
-    description: "An AI-powered platform for streamlining workflows, boosting productivity, and automating tasks. Features advanced insights, file management, and smart dashboards.",
-    tech: ["Next.js", "React", "Tailwind CSS", "AI Integration"],
-    role: "Full Stack Developer",
-    badge: "SaaS Product",
-    category: "AI",
-    featured: true,
-    githubLink: "https://github.com/harshhhparmar/NorthPeak",
-    liveLink: "https://north-peak-ecru.vercel.app/"
-  },
-  {
     title: "Back2U",
     subtitle: "Lost & Found Campus Portal",
     description: "A web-based lost and found platform for college campuses where students and staff can report lost items, upload found items, search listings, and connect with item owners.",
@@ -67,18 +55,6 @@ const PROJECTS = [
     liveLink: "https://back2uwebapp.vercel.app/auth"
   },
   {
-    title: "Jay Computer",
-    subtitle: "Service Website",
-    description: "A business website built for a local digital service business, helping users access government scheme info, documents, and online services.",
-    tech: ["Web Dev", "Vercel", "Responsive"],
-    role: "Developer / Builder",
-    badge: "Client Utility",
-    category: "Web",
-    featured: false,
-    githubLink: "https://github.com/harshhhparmar/Jay-Computer-",
-    liveLink: "https://jaycomputer.vercel.app/",
-  },
-  {
     title: "A2 Thai Spa",
     subtitle: "Service Website",
     description: "A business website built for a local spa, showcasing their services, pricing, and providing a clean online presence for customers to find them.",
@@ -89,6 +65,31 @@ const PROJECTS = [
     featured: false,
     githubLink: "https://github.com/harshhhparmar/A2-Thai",
     liveLink: "https://a2-thai.vercel.app/",
+  },
+  {
+    title: "NorthPeak",
+    subtitle: "AI SaaS & Productivity Tool",
+    description: "An AI-powered platform for streamlining workflows, boosting productivity, and automating tasks. Features advanced insights, file management, and smart dashboards.",
+    tech: ["Next.js", "React", "Tailwind CSS", "AI Integration"],
+    role: "Full Stack Developer",
+    badge: "SaaS Product",
+    category: "AI",
+    featured: true,
+    githubLink: "https://github.com/harshhhparmar/NorthPeak",
+    liveLink: "https://north-peak-ecru.vercel.app/"
+  },
+  {
+    title: "LeadDesk Mini",
+    subtitle: "Lead Management Mini-CRM",
+    description: "A full-stack lead management mini-CRM allowing businesses to capture incoming leads from a conversion-optimized landing page and manage them within a secure, authenticated admin dashboard.",
+    problemSolved: "Streamlines lead capture, real-time status tracking (New, Contacted, Closed), and live search with role-protected Firestore security.",
+    tech: ["React", "TypeScript", "Firebase", "Tailwind CSS", "Vercel"],
+    role: "Full Stack Developer",
+    badge: "SaaS / CRM",
+    category: "Web",
+    featured: true,
+    githubLink: "https://github.com/harshhhparmar/LeadDesk-Mini-",
+    liveLink: "https://lead-desk-mini-dh.vercel.app/"
   },
 ];
 
@@ -116,28 +117,38 @@ export function Projects() {
 
       {/* High-Density Bento Grid */}
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 relative z-10">
-        {PROJECTS.map((project, idx) => (
-          <motion.div
-            whileHover={{ y: -3 }}
-            transition={{ duration: 0.2 }}
-            key={project.title}
-            onClick={() => setSelectedProject(project)}
-            className={`group cursor-pointer bg-white/[0.02] border border-white/10 rounded-2xl overflow-hidden flex flex-col justify-between p-5 transition-colors duration-200 hover:bg-white/[0.04] hover:border-brand/40 relative ${
-              idx === 0 ? "sm:col-span-2 lg:col-span-2" : ""
-            }`}
-          >
-            <div>
-              {/* Unboxed Metadata Kicker */}
-              <div className="flex items-center justify-between gap-2 mb-2.5">
-                <div className="flex items-center gap-2 text-xs font-mono text-gray-400 truncate">
-                  <span className="text-brand font-semibold">{project.badge}</span>
-                  <span aria-hidden="true" className="text-white/20">·</span>
-                  <span className="truncate">{project.role}</span>
+        {PROJECTS.map((project) => {
+          const isHighlighted = Boolean((project as any).highlighted);
+          return (
+            <motion.div
+              whileHover={{ y: -3 }}
+              transition={{ duration: 0.2 }}
+              key={project.title}
+              onClick={() => setSelectedProject(project)}
+              className={`group cursor-pointer rounded-2xl overflow-hidden flex flex-col justify-between p-5 transition-colors duration-200 relative ${
+                isHighlighted
+                  ? "sm:col-span-2 lg:col-span-2 bg-gradient-to-br from-brand/[0.09] via-white/[0.03] to-white/[0.02] border border-brand/50 hover:border-brand shadow-[0_0_30px_rgba(252,110,96,0.1)]"
+                  : "bg-white/[0.02] border border-white/10 hover:bg-white/[0.04] hover:border-brand/40"
+              }`}
+            >
+              <div>
+                {/* Unboxed Metadata Kicker */}
+                <div className="flex items-center justify-between gap-2 mb-2.5">
+                  <div className="flex items-center gap-2 text-xs font-mono text-gray-400 truncate">
+                    <span className="text-brand font-semibold">{project.badge}</span>
+                    <span aria-hidden="true" className="text-white/20">·</span>
+                    <span className="truncate">{project.role}</span>
+                  </div>
+                  <div
+                    className={`w-7 h-7 rounded-lg flex items-center justify-center transition-colors shrink-0 ${
+                      isHighlighted
+                        ? "bg-brand text-black"
+                        : "bg-white/5 text-gray-400 group-hover:bg-brand group-hover:text-black"
+                    }`}
+                  >
+                    <ArrowUpRight className="w-3.5 h-3.5" />
+                  </div>
                 </div>
-                <div className="w-7 h-7 rounded-lg bg-white/5 flex items-center justify-center text-gray-400 group-hover:bg-brand group-hover:text-black transition-colors shrink-0">
-                  <ArrowUpRight className="w-3.5 h-3.5" />
-                </div>
-              </div>
 
               <div className="mb-2">
                 <h3 className="font-display text-lg sm:text-xl font-bold text-white group-hover:text-brand transition-colors inline">
@@ -195,7 +206,8 @@ export function Projects() {
               </div>
             </div>
           </motion.div>
-        ))}
+          );
+        })}
       </div>
 
       {/* Modal */}
