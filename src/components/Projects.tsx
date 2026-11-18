@@ -97,98 +97,106 @@ export function Projects() {
 
   return (
     <Section id="projects" className="bg-[#050505] relative overflow-hidden">
-      {/* Ambient background glows */}
-      <div className="absolute top-1/4 left-0 w-96 h-96 bg-brand/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-0 w-[30rem] h-[30rem] bg-brand/5 rounded-full blur-[150px] pointer-events-none" />
-      
-      <div className="text-center mb-12 relative z-10">
-        <Reveal>
-          <div className="inline-block font-mono text-brand text-sm tracking-[0.2em] uppercase mb-4">
-            Selected Work
+      {/* Compact Horizontal Section Header */}
+      <Reveal>
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-6 pb-4 border-b border-white/[0.08]">
+          <div>
+            <div className="font-mono text-brand text-xs tracking-wider uppercase mb-1">
+              02. Selected Work
+            </div>
+            <h2 className="font-display text-2xl sm:text-3xl font-bold text-white tracking-tight">
+              Projects I've Built.
+            </h2>
           </div>
-          <h2 className="font-display text-4xl md:text-[48px] leading-[1.1] font-bold text-white mb-8">
-            Projects I've Built.
-          </h2>
-        </Reveal>
-      </div>
-      
-      <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
-        <AnimatePresence mode="popLayout">
-          {PROJECTS.map((project) => (
-            <motion.div
-              layout
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              whileHover={{ scale: 1.02, y: -5 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ duration: 0.3 }}
-              key={project.title}
-              onClick={() => setSelectedProject(project)}
-              className="group cursor-pointer bg-white/[0.02] backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden flex flex-col transition-all duration-500 hover:bg-white/[0.05] hover:border-brand/40 shadow-lg hover:shadow-2xl hover:shadow-brand/20 relative"
-            >
-              {/* Subtle gradient overlay on hover */}
-              <div className="absolute inset-0 bg-gradient-to-br from-brand/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-              
-              <div className="p-5 flex flex-col h-full relative z-10">
-                <div className="flex justify-between items-start mb-4">
-                  <span className="px-2.5 py-1 bg-brand/10 text-brand text-[10px] font-mono font-semibold uppercase tracking-wider rounded border border-brand/20">
-                    {project.badge}
-                  </span>
-                  <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-brand group-hover:text-black group-hover:scale-110 transition-all duration-300">
-                    <ArrowUpRight className="w-4 h-4" />
-                  </div>
+          <div className="font-mono text-xs text-gray-500">
+            0{PROJECTS.length} Shipped Projects · Click any project for full case overview
+          </div>
+        </div>
+      </Reveal>
+
+      {/* High-Density Bento Grid */}
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 relative z-10">
+        {PROJECTS.map((project, idx) => (
+          <motion.div
+            whileHover={{ y: -3 }}
+            transition={{ duration: 0.2 }}
+            key={project.title}
+            onClick={() => setSelectedProject(project)}
+            className={`group cursor-pointer bg-white/[0.02] border border-white/10 rounded-2xl overflow-hidden flex flex-col justify-between p-5 transition-colors duration-200 hover:bg-white/[0.04] hover:border-brand/40 relative ${
+              idx === 0 ? "sm:col-span-2 lg:col-span-2" : ""
+            }`}
+          >
+            <div>
+              {/* Unboxed Metadata Kicker */}
+              <div className="flex items-center justify-between gap-2 mb-2.5">
+                <div className="flex items-center gap-2 text-xs font-mono text-gray-400 truncate">
+                  <span className="text-brand font-semibold">{project.badge}</span>
+                  <span aria-hidden="true" className="text-white/20">·</span>
+                  <span className="truncate">{project.role}</span>
                 </div>
-                
-                <h3 className="font-display text-xl font-bold text-white mb-2 group-hover:text-brand transition-colors duration-300">
-                  {project.title}
-                </h3>
-                <p className="text-sm text-gray-400 mb-4 line-clamp-2 group-hover:text-gray-300 transition-colors duration-300">
-                  {project.description}
-                </p>
-                
-                <div className="flex flex-wrap gap-2 mb-5">
-                  {project.tech.slice(0, 3).map((tech) => (
-                    <span key={tech} className="text-[10px] sm:text-xs font-mono text-gray-400 px-2 py-1 bg-black/40 rounded border border-white/5 group-hover:bg-brand/10 group-hover:text-brand-light group-hover:border-brand/20 transition-all duration-300">
-                      {tech}
-                    </span>
-                  ))}
-                  {project.tech.length > 3 && (
-                    <span className="text-[10px] sm:text-xs font-mono text-gray-500 px-2 py-1">
-                      +{project.tech.length - 3}
-                    </span>
-                  )}
-                </div>
-                
-                <div className="flex items-center justify-between gap-3 mt-auto pt-5 border-t border-white/10">
-                  {project.githubLink && (
-                    <a 
-                      href={project.githubLink} 
-                      target="_blank" 
-                      rel="noreferrer" 
-                      className="flex items-center justify-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 text-white text-xs font-medium rounded-lg transition-all flex-1"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <Github size={14} /> GitHub
-                    </a>
-                  )}
-                  {project.liveLink && (
-                    <a 
-                      href={project.liveLink} 
-                      target="_blank" 
-                      rel="noreferrer" 
-                      className="flex items-center justify-center gap-2 px-4 py-2 bg-brand text-black text-xs font-semibold rounded-lg hover:bg-brand-light transition-all shadow-[0_0_15px_rgba(252,110,96,0.2)] hover:shadow-[0_0_20px_rgba(252,110,96,0.4)] flex-1"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      Live Demo <ArrowUpRight size={14} />
-                    </a>
-                  )}
+                <div className="w-7 h-7 rounded-lg bg-white/5 flex items-center justify-center text-gray-400 group-hover:bg-brand group-hover:text-black transition-colors shrink-0">
+                  <ArrowUpRight className="w-3.5 h-3.5" />
                 </div>
               </div>
-            </motion.div>
-          ))}
-        </AnimatePresence>
-      </motion.div>
+
+              <div className="mb-2">
+                <h3 className="font-display text-lg sm:text-xl font-bold text-white group-hover:text-brand transition-colors inline">
+                  {project.title}
+                </h3>
+                <span className="text-gray-500 text-xs sm:text-sm font-normal ml-2">
+                  — {project.subtitle}
+                </span>
+              </div>
+
+              <p className="text-xs sm:text-sm text-gray-400 mb-4 line-clamp-2 leading-relaxed">
+                {project.description}
+              </p>
+            </div>
+
+            <div>
+              {/* Clean Unboxed Tech Stack */}
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] font-mono text-gray-500 mb-4 pt-3 border-t border-white/[0.06]">
+                {project.tech.map((tech, tIdx) => (
+                  <span key={tech} className="inline-flex items-center gap-2">
+                    <span className="text-gray-300 group-hover:text-brand-light transition-colors">
+                      {tech}
+                    </span>
+                    {tIdx < project.tech.length - 1 && (
+                      <span aria-hidden="true" className="text-white/20">·</span>
+                    )}
+                  </span>
+                ))}
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex items-center gap-2.5">
+                {project.githubLink && (
+                  <a
+                    href={project.githubLink}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center justify-center gap-1.5 px-3.5 py-2 bg-white/5 hover:bg-white/10 border border-white/10 text-white text-xs font-medium rounded-lg transition-colors flex-1 whitespace-nowrap shrink-0"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <Github size={13} /> GitHub
+                  </a>
+                )}
+                {project.liveLink && (
+                  <a
+                    href={project.liveLink}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center justify-center gap-1.5 px-3.5 py-2 bg-brand text-black text-xs font-semibold rounded-lg hover:bg-brand-light transition-colors flex-1 whitespace-nowrap shrink-0"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    Live Demo <ArrowUpRight size={13} />
+                  </a>
+                )}
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
 
       {/* Modal */}
       <AnimatePresence>
@@ -201,71 +209,87 @@ export function Projects() {
             onClick={() => setSelectedProject(null)}
           >
             <motion.div
-              initial={{ opacity: 0, y: 50, scale: 0.95 }}
+              initial={{ opacity: 0, y: 24, scale: 0.97 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 20, scale: 0.95 }}
+              exit={{ opacity: 0, y: 16, scale: 0.97 }}
+              transition={{ duration: 0.2 }}
               onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-2xl bg-[#0a0a0a] border border-white/10 rounded-3xl overflow-hidden shadow-2xl relative max-h-[90vh] overflow-y-auto"
+              className="w-full max-w-2xl bg-[#0a0a0a] border border-white/15 rounded-2xl overflow-hidden shadow-2xl relative max-h-[90vh] overflow-y-auto"
             >
-              <button 
+              <button
                 onClick={() => setSelectedProject(null)}
-                className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 text-white transition-colors z-10 backdrop-blur-md"
+                aria-label="Close modal"
+                className="absolute top-4 right-4 w-9 h-9 flex items-center justify-center rounded-lg bg-white/5 hover:bg-white/10 text-white transition-colors z-10"
               >
-                <X size={20} />
+                <X size={18} />
               </button>
 
-              <div className="p-8 sm:p-10">
-                <div className="flex items-center gap-3 mb-6">
-                  <span className="px-3 py-1 bg-brand/10 text-brand text-xs font-mono font-semibold uppercase tracking-wider rounded-full border border-brand/20">
-                    {selectedProject.badge}
-                  </span>
-                  <span className="text-gray-500 text-sm font-mono">{selectedProject.role}</span>
+              <div className="p-6 sm:p-8">
+                <div className="flex items-center gap-2 text-xs font-mono text-gray-400 mb-3">
+                  <span className="text-brand font-semibold">{selectedProject.badge}</span>
+                  <span aria-hidden="true">·</span>
+                  <span>{selectedProject.role}</span>
                 </div>
 
-                <h3 className="font-display text-3xl sm:text-4xl font-bold text-white mb-2">
+                <h3 className="font-display text-2xl sm:text-3xl font-bold text-white mb-1">
                   {selectedProject.title}
                 </h3>
-                <p className="text-lg text-brand font-light mb-8">
+                <p className="text-base text-brand mb-6">
                   {selectedProject.subtitle}
                 </p>
 
-                <div className="space-y-6 mb-10">
+                <div className="space-y-4 mb-6">
                   <div>
-                    <h4 className="text-white font-medium mb-2">Overview</h4>
-                    <p className="text-gray-400 text-sm sm:text-base leading-relaxed">
+                    <h4 className="text-white text-sm font-semibold mb-1.5">Overview</h4>
+                    <p className="text-gray-400 text-sm leading-relaxed">
                       {selectedProject.description}
                     </p>
                   </div>
-                  {/* @ts-ignore */}
                   {selectedProject.problemSolved && (
-                    <div className="p-5 bg-white/5 rounded-2xl border border-white/10">
-                      <h4 className="text-brand text-sm font-mono uppercase tracking-wider mb-2">Problem Solved</h4>
-                      {/* @ts-ignore */}
-                      <p className="text-gray-300 text-sm leading-relaxed">{selectedProject.problemSolved}</p>
+                    <div className="p-4 bg-white/[0.03] rounded-xl border border-white/10">
+                      <h4 className="text-brand text-xs font-mono uppercase tracking-wider mb-1">
+                        Problem Solved
+                      </h4>
+                      <p className="text-gray-300 text-sm leading-relaxed">
+                        {selectedProject.problemSolved}
+                      </p>
                     </div>
                   )}
                 </div>
 
-                <div className="mb-10">
-                  <h4 className="text-white font-medium mb-3">Technologies</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {selectedProject.tech.map((tech) => (
-                      <span key={tech} className="text-xs font-mono text-gray-400 px-3 py-1.5 bg-black rounded-lg border border-white/5">
-                        {tech}
+                <div className="mb-6">
+                  <h4 className="text-white text-sm font-semibold mb-2">Technologies</h4>
+                  <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-gray-300">
+                    {selectedProject.tech.map((tech, i) => (
+                      <span key={tech} className="inline-flex items-center gap-2">
+                        <span>{tech}</span>
+                        {i < selectedProject.tech.length - 1 && (
+                          <span aria-hidden="true" className="text-white/20">·</span>
+                        )}
                       </span>
                     ))}
                   </div>
                 </div>
 
-                <div className="flex flex-wrap gap-4 pt-6 border-t border-white/10">
+                <div className="flex flex-wrap gap-3 pt-5 border-t border-white/10">
                   {selectedProject.liveLink && (
-                    <a href={selectedProject.liveLink} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 px-6 py-3 bg-brand text-black font-semibold text-sm rounded-full hover:bg-brand-light transition-colors flex-1 sm:flex-none">
-                      Live Project <ArrowUpRight size={16} />
+                    <a
+                      href={selectedProject.liveLink}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center justify-center gap-2 px-5 py-2.5 bg-brand text-black font-semibold text-xs sm:text-sm rounded-lg hover:bg-brand-light transition-colors flex-1 sm:flex-none whitespace-nowrap"
+                    >
+                      Live Project <ArrowUpRight size={15} />
                     </a>
                   )}
                   {selectedProject.githubLink && (
-                    <a href={selectedProject.githubLink} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 px-6 py-3 bg-transparent border border-white/20 text-white font-medium text-sm rounded-full hover:bg-white/5 transition-colors flex-1 sm:flex-none">
-                      <Github size={16} /> View Code
+                    <a
+                      href={selectedProject.githubLink}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center justify-center gap-2 px-5 py-2.5 bg-white/5 border border-white/15 text-white font-medium text-xs sm:text-sm rounded-lg hover:bg-white/10 transition-colors flex-1 sm:flex-none whitespace-nowrap"
+                    >
+                      <Github size={15} /> View Code
                     </a>
                   )}
                 </div>

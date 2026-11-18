@@ -12,13 +12,13 @@ export function Section({ id, className, children }: SectionProps) {
   return (
     <motion.section
       id={id}
-      initial={{ opacity: 0, y: 60 }}
+      initial={{ opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.7, ease: "easeOut" }}
-      className={cn("py-12 sm:py-16 md:py-20 lg:py-24 w-full", className)}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      className={cn("py-8 sm:py-10 lg:py-12 w-full border-b border-white/[0.06]", className)}
     >
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 md:px-12 xl:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {children}
       </div>
     </motion.section>
@@ -35,7 +35,7 @@ interface RevealProps {
 
 export function Reveal({ children, delay = 0, width = "100%", className }: RevealProps) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-10%" });
+  const isInView = useInView(ref, { once: true, margin: "-8%" });
   const mainControls = useAnimation();
 
   useEffect(() => {
@@ -45,15 +45,16 @@ export function Reveal({ children, delay = 0, width = "100%", className }: Revea
   }, [isInView, mainControls]);
 
   return (
-    <div ref={ref} style={{ width }} className={cn("relative overflow-hidden", className)}>
+    <div ref={ref} style={{ width }} className={cn("relative", className)}>
       <motion.div
         variants={{
-          hidden: { opacity: 0, y: 75 },
+          hidden: { opacity: 0, y: 20 },
           visible: { opacity: 1, y: 0 },
         }}
         initial="hidden"
         animate={mainControls}
-        transition={{ duration: 0.8, delay, ease: [0.17, 0.55, 0.55, 1] }}
+        transition={{ duration: 0.45, delay, ease: [0.16, 1, 0.3, 1] }}
+        className="h-full"
       >
         {children}
       </motion.div>
@@ -64,10 +65,10 @@ export function Reveal({ children, delay = 0, width = "100%", className }: Revea
 export function SectionHeading({ number, title }: { number: string; title: string }) {
   return (
     <Reveal>
-      <div className="flex items-center gap-4 md:gap-6 mb-8 sm:mb-12 md:mb-16">
-        <span className="font-mono text-brand text-xl md:text-2xl">{number}</span>
-        <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-white">{title}</h2>
-        <div className="h-px bg-white/10 flex-grow ml-4 md:ml-8" />
+      <div className="flex items-center gap-3 md:gap-4 mb-6">
+        <span className="font-mono text-brand text-sm md:text-base">{number}.</span>
+        <h2 className="font-display text-2xl sm:text-3xl font-semibold tracking-tight text-white">{title}</h2>
+        <div className="h-px bg-white/10 flex-grow ml-3" />
       </div>
     </Reveal>
   );

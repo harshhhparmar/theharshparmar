@@ -7,12 +7,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
-import { Stats } from './components/Stats';
 import { Skills } from './components/Skills';
 import { Projects } from './components/Projects';
-import { Achievements } from './components/Achievements';
 import { Experience } from './components/Experience';
-import { Process } from './components/Process';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { AdminPanel } from './components/AdminPanel';
@@ -27,12 +24,9 @@ function Portfolio() {
       <Navbar />
       <Hero />
       <About />
-      <Stats />
-      <Skills />
       <Projects />
-      <Achievements />
       <Experience />
-      <Process />
+      <Skills />
       <Contact />
       <Footer />
       <BackToTop />

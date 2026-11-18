@@ -1,7 +1,5 @@
 import { Reveal, Section } from "./Section";
 import { Monitor, Server, Terminal, Database, Sparkles, Wrench, Cloud, Layers } from "lucide-react";
-import { motion } from "motion/react";
-import React from "react";
 
 const SKILL_CATEGORIES = [
   {
@@ -43,57 +41,52 @@ const SKILL_CATEGORIES = [
     title: "Others",
     icon: Layers,
     skills: ["Agile/Scrum", "UI/UX Principles", "Open Source", "Technical Writing"],
-  }
+  },
 ];
 
 export function Skills() {
   return (
-    <Section id="skills" className="bg-[#0a0a0a] relative overflow-hidden">
-      {/* Ambient background glow for glassmorphism */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40rem] h-[40rem] bg-brand/5 rounded-full blur-[150px] pointer-events-none" />
-      <div className="text-center mb-12 relative z-10">
-        <Reveal>
-          <div className="inline-block font-mono text-brand text-sm tracking-[0.2em] uppercase mb-4">
-            My Skills
+    <Section id="skills" className="bg-[#050505] relative overflow-hidden">
+      <Reveal>
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 mb-6 pb-4 border-b border-white/[0.08]">
+          <div>
+            <div className="font-mono text-brand text-xs tracking-wider uppercase mb-1">
+              04. My Skills
+            </div>
+            <h2 className="font-display text-2xl sm:text-3xl font-bold text-white tracking-tight">
+              Technologies I work with.
+            </h2>
           </div>
-          <h2 className="font-display text-4xl md:text-[48px] leading-[1.1] font-bold text-white mb-6">
-            Technologies I work with.
-          </h2>
-          <p className="text-gray-400 text-[18px] max-w-2xl mx-auto font-light leading-[1.7]">
+          <p className="text-gray-400 text-xs sm:text-sm max-w-md md:text-right">
             A consolidated view of the tools, languages, and frameworks I use to build scalable modern applications.
           </p>
-        </Reveal>
-      </div>
-      
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 relative z-10">
+        </div>
+      </Reveal>
+
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4 relative z-10">
         {SKILL_CATEGORIES.map((category, idx) => {
           const Icon = category.icon;
           return (
-            <Reveal key={category.title} delay={idx * 0.05}>
-              <motion.div
-                whileHover={{ y: -5 }}
-                className="group relative bg-white/[0.02] backdrop-blur-xl border border-white/10 rounded-2xl p-6 h-full flex flex-col transition-all duration-300 hover:bg-white/[0.04] hover:border-brand/30 overflow-hidden"
-              >
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white group-hover:bg-brand group-hover:text-black group-hover:border-brand transition-colors duration-500">
-                    <Icon size={18} />
-                  </div>
-                  <h3 className="font-display text-lg font-semibold text-white">
+            <Reveal key={category.title} delay={idx * 0.03}>
+              <div className="group bg-white/[0.02] border border-white/10 rounded-xl p-4 sm:p-5 h-full flex flex-col justify-between transition-colors duration-200 hover:bg-white/[0.04] hover:border-brand/30">
+                <div className="flex items-center justify-between gap-2 mb-3 pb-2.5 border-b border-white/[0.06]">
+                  <h3 className="font-display text-sm sm:text-base font-semibold text-white group-hover:text-brand transition-colors">
                     {category.title}
                   </h3>
+                  <Icon size={15} className="text-gray-500 group-hover:text-brand transition-colors shrink-0" />
                 </div>
-                
-                <div className="flex flex-wrap gap-2 mt-auto">
-                  {category.skills.map((skill) => (
-                    <span 
-                      key={skill} 
-                      className="text-[13px] font-medium text-gray-300 px-3 py-1.5 bg-white/5 rounded-lg border border-white/5 group-hover:border-white/10 transition-colors"
-                    >
-                      {skill}
+
+                <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5 text-xs text-gray-300 leading-relaxed">
+                  {category.skills.map((skill, sIdx) => (
+                    <span key={skill} className="inline-flex items-center gap-2">
+                      <span>{skill}</span>
+                      {sIdx < category.skills.length - 1 && (
+                        <span aria-hidden="true" className="text-white/20">·</span>
+                      )}
                     </span>
                   ))}
                 </div>
-              </motion.div>
+              </div>
             </Reveal>
           );
         })}

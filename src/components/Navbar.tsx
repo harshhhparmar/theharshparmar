@@ -4,12 +4,11 @@ import { Menu, X } from "lucide-react";
 import { cn } from "../lib/utils";
 
 const NAV_LINKS = [
-  { num: "01", name: "Home", href: "#home" },
-  { num: "02", name: "About", href: "#about" },
-  { num: "03", name: "Experience", href: "#experience" },
-  { num: "04", name: "Projects", href: "#projects" },
-  { num: "05", name: "Skills", href: "#skills" },
-  { num: "06", name: "Contact", href: "#contact" },
+  { name: "About", href: "#about" },
+  { name: "Projects", href: "#projects" },
+  { name: "Experience", href: "#experience" },
+  { name: "Skills", href: "#skills" },
+  { name: "Contact", href: "#contact" },
 ];
 
 export function Navbar() {
@@ -22,34 +21,35 @@ export function Navbar() {
     let sectionsCache: { id: string; top: number }[] = [];
 
     const updateCache = () => {
-      sectionsCache = NAV_LINKS.map(link => {
+      const allTargets = [{ name: "Home", href: "#home" }, ...NAV_LINKS];
+      sectionsCache = allTargets.map((link) => {
         const el = document.querySelector(link.href) as HTMLElement;
         return { id: link.href, top: el ? el.offsetTop : 0 };
       });
     };
 
     updateCache();
-    window.addEventListener('resize', updateCache);
+    window.addEventListener("resize", updateCache);
 
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          setIsScrolled(window.scrollY > 50);
+          setIsScrolled(window.scrollY > 30);
 
           let currentSection = "#home";
-          sectionsCache.forEach(section => {
-            if (window.scrollY >= section.top - 200) {
+          sectionsCache.forEach((section) => {
+            if (window.scrollY >= section.top - 180) {
               currentSection = section.id;
             }
           });
-          
+
           setActiveSection(currentSection);
           ticking = false;
         });
         ticking = true;
       }
     };
-    
+
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -61,22 +61,27 @@ export function Navbar() {
     <>
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-transparent",
-          isScrolled ? "bg-[#050505]/80 backdrop-blur-xl border-white/10 py-4" : "bg-transparent py-6"
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-200 border-b",
+          isScrolled
+            ? "bg-[#050505]/90 backdrop-blur-xl border-white/10 py-3"
+            : "bg-[#050505]/60 backdrop-blur-md border-white/[0.06] py-3.5"
         )}
       >
-        <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
-          <a href="#home" className="group flex items-center gap-2">
-            <span className="w-8 h-8 rounded-full bg-brand flex items-center justify-center font-display font-bold text-black text-sm transition-transform group-hover:scale-110">
-              HP
-            </span>
-            <span className="font-display font-medium text-white tracking-wide">
-              HARSH
-            </span>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-8">
+          {/* Zone 1: Single text element wordmark */}
+          <a
+            href="#home"
+            onClick={(e) => {
+              e.preventDefault();
+              document.querySelector("#home")?.scrollIntoView({ behavior: "smooth" });
+            }}
+            className="font-display text-lg font-bold tracking-tight text-white hover:text-brand transition-colors whitespace-nowrap shrink-0"
+          >
+            HARSH PARMAR
           </a>
 
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-8">
+          {/* Zone 2: 5 concise single-line text navigation links */}
+          <nav className="hidden md:flex items-center gap-7 text-sm font-medium text-gray-400">
             {NAV_LINKS.map((link) => {
               const isActive = activeSection === link.href;
               return (
@@ -85,42 +90,47 @@ export function Navbar() {
                   href={link.href}
                   onClick={(e) => {
                     e.preventDefault();
-                    document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' });
+                    document.querySelector(link.href)?.scrollIntoView({ behavior: "smooth" });
                   }}
-                  className="group relative flex flex-col text-sm font-medium text-gray-400 hover:text-white transition-colors"
+                  className={cn(
+                    "relative py-1 transition-colors whitespace-nowrap shrink-0 hover:text-white",
+                    isActive ? "text-white" : "text-gray-400"
+                  )}
                 >
-                  <span className={cn("font-mono text-[10px] uppercase mb-0.5 transition-colors", isActive ? "text-brand" : "text-brand/50 group-hover:text-brand")}>
-                    {link.num}
-                  </span>
-                  <span className={cn("transition-colors", isActive ? "text-white" : "")}>
-                    {link.name}
-                  </span>
-                  <span className={cn(
-                    "absolute -bottom-1 left-0 h-px bg-brand transition-all duration-300", 
-                    isActive ? "w-full" : "w-0 group-hover:w-full"
-                  )} />
+                  {link.name}
+                  <span
+                    className={cn(
+                      "absolute bottom-0 left-0 h-0.5 bg-brand transition-all duration-200",
+                      isActive ? "w-full" : "w-0"
+                    )}
+                  />
                 </a>
-              )
+              );
             })}
+          </nav>
+
+          {/* Zone 3: 1 primary action */}
+          <div className="flex items-center gap-3 shrink-0">
             <a
               href="#contact"
               onClick={(e) => {
                 e.preventDefault();
-                document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+                document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
               }}
-              className="ml-4 px-6 py-2.5 rounded-full border border-white/20 text-white text-sm font-medium hover:bg-white hover:text-black transition-all duration-300 pointer-events-auto shadow-lg"
+              className="hidden md:inline-flex items-center justify-center px-4 py-2 rounded-lg bg-brand text-black text-xs font-semibold hover:bg-brand-light transition-colors whitespace-nowrap shrink-0"
             >
               Hire Me
             </a>
-          </nav>
 
-          {/* Mobile Menu Toggle */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 text-gray-300 hover:text-white transition-colors z-50 relative"
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+            {/* Mobile Menu Toggle */}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle Navigation"
+              className="md:hidden p-2 text-gray-300 hover:text-white transition-colors z-50 relative"
+            >
+              {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
+          </div>
         </div>
       </header>
 
@@ -128,29 +138,39 @@ export function Navbar() {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            animate={{ opacity: 1, backdropFilter: "blur(20px)" }}
-            exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            className="fixed inset-0 z-40 bg-[#050505]/95 pt-32 px-6 flex flex-col gap-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-40 bg-[#050505]/95 backdrop-blur-xl pt-24 px-6 flex flex-col gap-5 md:hidden"
           >
             {NAV_LINKS.map((link, idx) => (
               <motion.a
                 key={link.name}
                 href={link.href}
-                initial={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 0, x: -16 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: idx * 0.1 }}
+                transition={{ delay: idx * 0.05 }}
                 onClick={(e) => {
                   e.preventDefault();
-                  document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' });
+                  document.querySelector(link.href)?.scrollIntoView({ behavior: "smooth" });
                   setIsMobileMenuOpen(false);
                 }}
-                className="text-3xl font-display font-medium text-white flex items-center gap-6 group"
+                className="text-2xl font-display font-semibold text-white hover:text-brand transition-colors py-2 border-b border-white/5"
               >
-                <span className="font-mono text-brand text-sm group-hover:translate-x-2 transition-transform">{link.num}</span>
-                <span className="group-hover:translate-x-2 transition-transform">{link.name}</span>
+                {link.name}
               </motion.a>
             ))}
+            <a
+              href="#contact"
+              onClick={(e) => {
+                e.preventDefault();
+                document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
+                setIsMobileMenuOpen(false);
+              }}
+              className="mt-2 inline-flex items-center justify-center px-5 py-3 rounded-xl bg-brand text-black font-semibold text-sm text-center"
+            >
+              Hire Me
+            </a>
           </motion.div>
         )}
       </AnimatePresence>
